@@ -1,20 +1,28 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject myPrefab;
+    public GameObject pfHuman;
+    private ArrayList humans = new ArrayList();
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject o1 = Instantiate(myPrefab, new Vector3(300, 200, 0), Quaternion.identity);
-        //o1.width = 20;
-        //o1.width = 30;
+        GameObject o1 = Instantiate(pfHuman, new Vector3(300, 200, 0), Quaternion.identity);
+        humans.Add(o1);
+    }
 
-        //Instantiate(myPrefab, new Vector3(350, 200, 0), Quaternion.identity);
-        //Instantiate(myPrefab, new Vector3(250, 200, 0), Quaternion.identity);
+    public ArrayList getHumans()
+    {
+        return humans;
+    }
+
+    public void killHuman(GameObject o)
+    {
+        humans.Remove(o);
     }
 
     // Update is called once per frame
