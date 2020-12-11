@@ -8,7 +8,7 @@ public class earth_physics : MonoBehaviour
 
     private Spawner s;
 
-    private double neigung;
+    public double neigung;
 
     private const float max_neigung = 30f;
     private const float neutralizer = 385.3f;
@@ -18,7 +18,8 @@ public class earth_physics : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb.freezeRotation = true;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -27,9 +28,11 @@ public class earth_physics : MonoBehaviour
         neigung = 0;
         foreach(GameObject g in s.getHumans())
         {
-            neigung += (g.transform.position.x - neutralizer);
+            Debug.Log("Human detektet");
+            float tmp = g.transform.position.x;
+            Debug.Log(tmp);
+            neigung += (tmp - neutralizer);
         }
-        float tmp = (float)(Math.Asin(neigung / (2 * 560)));
-        rb.rotation = tmp; 
+        rb.rotation = (float)(Math.Asin(neigung / (2 * 560)));
     }
 }
