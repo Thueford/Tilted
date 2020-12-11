@@ -14,7 +14,7 @@ public class Spawner : MonoBehaviour
 
     public static int wavePeriod = 1024;
     public static int waveVary = 512;
-
+     
     // Start is called before the first frame update
     void Start()
     {
