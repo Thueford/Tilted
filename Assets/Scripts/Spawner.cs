@@ -13,10 +13,7 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         GameObject o1 = Instantiate(pfHuman, new Vector3(300, 200, 0), Quaternion.identity);
-        RectTransform rt = gameObject.GetComponent<RectTransform>();
-        //rt.rect.width = 50f;
-        //rt.rect.height = 100f;
-        rt.localScale = new Vector3(50, 90, 0);
+        o1.transform.localScale = new Vector3(0.25f, 0.5f, 0);
         humans.Add(o1);
     }
 
@@ -31,7 +28,6 @@ public class Spawner : MonoBehaviour
             humans.Remove(o);
             Destroy(o);
         }
-
     }
 
     // Update is called once per frame
