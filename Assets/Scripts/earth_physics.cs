@@ -26,7 +26,7 @@ public class earth_physics : MonoBehaviour
     void Update()
     {
         neigung = 0;
-        foreach(GameObject g in s.getHumans())
+        foreach(GameObject g in Spawner.getHumans())
         {
             Debug.Log("Human detektet");
             float tmp = g.transform.position.x;
