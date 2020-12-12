@@ -10,6 +10,8 @@ public class walking : MonoBehaviour
     private static System.Random rand = new System.Random();
     public Rigidbody2D rb;
 
+    private float winkel;
+
     private bool on_earth;
 
     public float speed;
@@ -20,6 +22,8 @@ public class walking : MonoBehaviour
     {
         bndEarth = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<Renderer>().bounds;
         rb = GetComponent<Rigidbody2D>();
+
+        
 
         if (rand.Next(2) == 0) { right = false; } else { right = true; }
         on_earth = false;
@@ -46,7 +50,19 @@ public class walking : MonoBehaviour
         {
             rb.velocity = new Vector2(-speed, rb.velocity.y);
         }
-        
+        /*winkel = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<Rigidbody2D>().rotation;
+        Debug.Log("Winkel: " + winkel);
+        if ((rand.NextDouble() * 60) < winkel)
+        {
+            if (winkel < 0)
+            {
+                right = false;
+            } else
+            {
+                right = true;
+            }
+        }*/
+
     }
     public void moveY(float y)
     {
@@ -55,7 +71,7 @@ public class walking : MonoBehaviour
 
     public void OnTriggerEnter2D()
     {
-        right = !right;
+        right = !right; 
         float tmpY = rb.transform.position.y;
         y = (float)rand.NextDouble() * (bndEarth.size.y - 0.3f);
         moveY(tmpY - y);

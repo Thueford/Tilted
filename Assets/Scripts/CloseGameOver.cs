@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CloseGameOver : MonoBehaviour
 {
@@ -14,5 +15,10 @@ public class CloseGameOver : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void btn_pressed()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 }
