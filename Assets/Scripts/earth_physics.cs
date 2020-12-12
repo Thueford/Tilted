@@ -42,17 +42,17 @@ public class earth_physics : MonoBehaviour
                 neigung += (tmp - transform.position.x);
             }
         }
-        adjust_angle((float) -neigung/10);
+        adjust_angle((float) -neigung/Spawner.getHumans().Length);
     }
 
     private void adjust_angle(float n)
     {
-        Debug.Log("Winkel: " + n);
+        //Debug.Log("Winkel: " + n);
         if (rb.rotation < n-4) { 
-            rb.transform.Rotate(new Vector3(0, 0, 2 * Time.deltaTime * 2)); 
+            rb.transform.Rotate(new Vector3(0, 0, 0.5f * Time.deltaTime * 0.8f)); 
         } else if(rb.rotation > n+4)
         {
-            rb.transform.Rotate(new Vector3(0, 0, -2 * Time.deltaTime * 2));
+            rb.transform.Rotate(new Vector3(0, 0, -0.5f * Time.deltaTime * 0.8f));
         }
         
     }
