@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,7 +34,7 @@ public class MouseInputHandler : MonoBehaviour
         //checks for mouse events
         if (UnityEngine.Input.GetMouseButtonDown(0))
         {
-            GameObject[] humans = Spawner.getHumans();
+            GameObject[] humans = playerattribute.getNearestMouseHumans();
 
             mouse_position = Input.mousePosition;
             mouse_position = Camera.main.ScreenToWorldPoint(mouse_position);
@@ -49,7 +50,7 @@ public class MouseInputHandler : MonoBehaviour
                     Skill.skill.run_skill = true;
                 }
             }
-            System.Array.Sort(humans, (a, b) => { return Vector3.Distance(a.transform.position, mouse_position) < Vector3.Distance(b.transform.position, mouse_position) ? -1 : 1; });
+            
 
             for (int i = 0; i<num_max_humans; i++)
             {
@@ -92,5 +93,10 @@ public class MouseInputHandler : MonoBehaviour
     float distanceOf(Vector3 go, Vector3 mouse)
     {
         return Mathf.Abs(mouse.x - go.x + mouse.y - go.y);
+    }
+
+    public static float getMouseDistance(GameObject o)
+    {
+        return Vector3.Distance(o.transform.position, MouseInputHandler.mouse_position);
     }
 }
