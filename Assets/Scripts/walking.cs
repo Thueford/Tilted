@@ -10,6 +10,8 @@ public class walking : MonoBehaviour
     private static System.Random rand = new System.Random();
     public Rigidbody2D rb;
 
+    private bool on_earth;
+
     public float speed;
 
     public bool right;
@@ -17,11 +19,10 @@ public class walking : MonoBehaviour
     void Start()
     {
         bndEarth = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<Renderer>().bounds;
-        y = (float)rand.NextDouble() * bndEarth.size.y + bndEarth.min.y;
         rb = GetComponent<Rigidbody2D>();
 
         if (rand.Next(2) == 0) { right = false; } else { right = true; }
-        
+        on_earth = false;
     }
 
     // Update is called once per frame
@@ -38,10 +39,10 @@ public class walking : MonoBehaviour
         {
             rb.velocity = new Vector2(0f, 0f);
         }
-        if (right)
+        if (right && on_earth)
         {
             rb.velocity = new Vector2(speed, rb.velocity.y);
-        } else
+        } else if(on_earth)
         {
             rb.velocity = new Vector2(-speed, rb.velocity.y);
         }
@@ -49,13 +50,25 @@ public class walking : MonoBehaviour
     }
     public void moveY(float y)
     {
-        if(bndEarth.max.y>y && bndEarth.min.y < y) { this.y = y; }
+        this.y = y;
     }
 
     public void OnTriggerEnter2D()
     {
         right = !right;
+        float tmpY = rb.transform.position.y;
+        y = (float)rand.NextDouble() * bndEarth.size.y + 0.3f;
+        moveY(tmpY - y);
+    }
 
+    public void OnTriggerExit2D()
+    {
+        on_earth = true;
+    }
+
+    public void OnCollisionEnter2D()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, 0f);
     }
 
 }
