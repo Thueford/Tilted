@@ -15,6 +15,7 @@ public class earth_physics : MonoBehaviour
 
     private float center;
     private float xsize;
+    private float ysize;
 
 
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class earth_physics : MonoBehaviour
         Debug.Log("start");
         center = GetComponent<Renderer>().bounds.center.x;
         xsize = GetComponent<Renderer>().bounds.extents.x;
+        ysize = GetComponent<Renderer>().bounds.extents.y;
         Debug.Log(xsize);
         Debug.Log(transform.position.x);
     }
@@ -35,7 +37,7 @@ public class earth_physics : MonoBehaviour
         neigung = 0;
         foreach (GameObject g in Spawner.getHumans())
         {
-            if (g.transform.position.y < 125 && g.transform.position.y > 50) {
+            if (g.transform.position.y < center+ysize && g.transform.position.y > center-ysize) {
                 float tmp = g.transform.position.x;
                 
                 
