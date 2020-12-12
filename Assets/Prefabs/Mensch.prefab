@@ -179,4 +179,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   y: 0
   rb: {fileID: 1894060589607417627}
+  speed: 5
   right: 0
