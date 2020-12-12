@@ -24,13 +24,13 @@ public class earth_physics : MonoBehaviour
     {
         rb.freezeRotation = true;
         rb = GetComponent<Rigidbody2D>();
-        Debug.Log("start");
+        //Debug.Log("start");
         xcenter = GetComponent<Renderer>().bounds.center.x;
         ycenter = GetComponent<Renderer>().bounds.center.y;
         xsize = GetComponent<Renderer>().bounds.extents.x;
         ysize = GetComponent<Renderer>().bounds.extents.y;
-        Debug.Log(xsize);
-        Debug.Log(transform.position.x);
+        //Debug.Log(xsize);
+        //Debug.Log(transform.position.x);
     }
 
     // Update is called once per frame
@@ -51,7 +51,7 @@ public class earth_physics : MonoBehaviour
 
     private void adjust_angle(float n)
     {
-        Debug.Log("Winkel: " + n);
+        //Debug.Log("Winkel: " + n);
         if (rb.rotation < n-4) { 
             rb.transform.Rotate(new Vector3(0, 0, 0.5f * Time.deltaTime * 0.8f)); 
         } else if(rb.rotation > n+4)

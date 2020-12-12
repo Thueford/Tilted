@@ -4,27 +4,60 @@ using UnityEngine;
 
 public class playerattribute : MonoBehaviour
 {
+    public static playerattribute player;
     public int xp;
     public float time;
     public ArrayList highscore;
     public int anzMenschen;
     public int dragDropAnz;
-    public IDictionary<string, bool> abilityActive_global = new Dictionary<string, bool>();
+    public Dictionary<KeyCode, string> keySkill;
+
+    private void Awake()
+    {
+        if (player != null)
+        {
+            return;
+        }
+        player = this;
+
+        keySkill = new Dictionary<KeyCode, string>()
+        {
+            {KeyCode.Q, "Freeze"},
+            {KeyCode.W, "Shockwave"},
+            {KeyCode.E, "Wall"},
+            {KeyCode.R, "Magnet"},
+            {KeyCode.T, "Bomb"},
+            {KeyCode.Z, "Hillclimber"},
+            {KeyCode.U, "Virus COV-19"}
+        };
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        var abilityActive = new Dictionary<string, bool>()
+        
+    }
+
+    public void useSkill(string key)
+    {
+        //gets called from keyhandler and checks if ability is useable if true then use when mouseclicked?
+        //if not available return
+
+
+        Debug.Log("setskill");
+        //MouseInputHandler.Instance.skill = ability[key];
+        //check if is useable
+        //if (cool_down.isAvailable)#
+        //gets skill key from the keydict
+        //string skill = playerattribute.player.keySkill[key];
+        if (Skill.skill.ability.ContainsKey(key))
         {
-            {"Freeze", false},
-            {"Shockwave", false},
-            {"Wall", false},
-            {"Magnet", false},
-            {"Bomb", false},
-            {"Hillclimber", false},
-            {"Virus COV-19", false }
-        };
-        abilityActive_global = abilityActive;
+            //hier vorher auf icon cooldown checken
+
+            //time auf cooldowntime setzten
+            Skill.skill.time = Skill.skill.time_testcool_down;
+            Skill.skill.currentSkill = key;
+        }
     }
 
     // Update is called once per frame
@@ -46,11 +79,6 @@ public class playerattribute : MonoBehaviour
     {
         return time; // time = hightscore
     }
-    // Fähigkeit aktiviert wenn value gleich true
-    private void changeFaehigkeitenActive(string key, bool activ)
-    {
-        abilityActive_global[key] = activ;
-    } 
 
     // XP Methoden
     private int getXP()

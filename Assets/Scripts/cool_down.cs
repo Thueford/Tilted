@@ -18,6 +18,11 @@ public class cool_down : MonoBehaviour
         time = cooldown_time;
     }
 
+    public bool isAvailable()
+    {
+        return available;
+    }
+
     // Update is called once per frame
     void Update()
     {
