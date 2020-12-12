@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class pause : MonoBehaviour
 {
@@ -30,5 +31,10 @@ public class pause : MonoBehaviour
     {
         panel.gameObject.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void Exit()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 }

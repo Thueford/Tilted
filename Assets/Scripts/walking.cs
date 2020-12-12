@@ -57,7 +57,7 @@ public class walking : MonoBehaviour
     {
         right = !right;
         float tmpY = rb.transform.position.y;
-        y = (float)rand.NextDouble() * bndEarth.size.y + 0.3f;
+        y = (float)rand.NextDouble() * (bndEarth.size.y - 0.3f);
         moveY(tmpY - y);
     }
 

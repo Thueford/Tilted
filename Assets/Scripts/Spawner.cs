@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.PackageManager;
+//using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -22,6 +22,7 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Start Spawner");
         if (prefabs.Length != prefabProb.Length)
             throw new AssertionException("prefabs.Length != prefabProb.Length", "Turtle.Spawner prefabs must have same length as prefabProb");
         //Debug.Assert(prefabs.Length == prefabProb.Length, "Turtle.Spawner prefabs must have same length as prefabProb.");
@@ -44,6 +45,11 @@ public class Spawner : MonoBehaviour
             humans.Remove(o);
             Destroy(o);
         }
+    }
+
+    public static void killAllHumans()
+    {
+        humans.Clear();
     }
 
     // Update is called once per frame
@@ -78,5 +84,10 @@ public class Spawner : MonoBehaviour
         GameObject o = Instantiate(prefabs[i], new Vector3(x, y, 0), Quaternion.identity);
         o.transform.localScale = new Vector3(2.3f, 3.5f, 0);
         humans.Add(o);
+    }
+
+    public void OnDestroy()
+    {
+        humans.Clear();
     }
 }

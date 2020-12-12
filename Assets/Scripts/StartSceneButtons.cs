@@ -34,8 +34,9 @@ public class StartSceneButtons : MonoBehaviour
     /// <summary>
     /// skilltreebutton pressed
     /// </summary>
-    public void skilltree_btn_pressed()
+    public void exit_btn_pressed()
     {
         //open skilltree
+        Application.Quit();
     }
 }

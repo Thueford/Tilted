@@ -51,7 +51,7 @@ public class earth_physics : MonoBehaviour
 
     private void adjust_angle(float n)
     {
-        Debug.Log("Winkel: " + n);
+        //Debug.Log("Winkel: " + n);
         if (rb.rotation < n-4) { 
             rb.transform.Rotate(new Vector3(0, 0, 0.5f * Time.deltaTime * 0.8f)); 
         } else if(rb.rotation > n+4)
