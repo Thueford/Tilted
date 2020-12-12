@@ -7,7 +7,7 @@ public class MouseInputHandler : MonoBehaviour
     public static MouseInputHandler Instance;
     private Vector3 mouse_position;
     private List<GameObject> picked = new List<GameObject>();
-    private int num_max_humans = 2;
+    public static int num_max_humans = 2;
     private int pickup_radius = 15;
 
     void Awake()
@@ -46,10 +46,7 @@ public class MouseInputHandler : MonoBehaviour
                 Debug.Log(Vector3.Distance(humans[i].transform.position, mouse_position));
                 if (Vector3.Distance(humans[i].transform.position, mouse_position) <= pickup_radius)
                 {
-                    /////////////////////////////////////////
-                    ////////    ADD SOUNDS HERE    //////////
-                    /////////////////////////////////////////
-
+                    //Debug.Log(distanceOf(humans[i].transform.position, mouse_position)); 
                     picked.Add(humans[i]);
                     Debug.Log("pick");
                 }

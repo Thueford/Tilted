@@ -1,0 +1,92 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class playerattribute : MonoBehaviour
+{
+    public int xp;
+    public float time;
+    public ArrayList highscore;
+    public int anzMenschen;
+    public int dragDropAnz;
+    public IDictionary<string, bool> abilityActive_global = new Dictionary<string, bool>();
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        var abilityActive = new Dictionary<string, bool>()
+        {
+            {"Freeze", false},
+            {"Shockwave", false},
+            {"Wall", false},
+            {"Magnet", false},
+            {"Bomb", false},
+            {"Hillclimber", false},
+            {"Virus COV-19", false }
+        };
+        abilityActive_global = abilityActive;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // if(!GAMEOVER) { ... }
+        time = Time.time;
+    }
+    
+  
+    // Highscore
+    public void newHighscore(float value)
+    {
+        highscore = new ArrayList();
+        highscore.Add(value);
+    }
+
+    public float getHighscore()
+    {
+        return time; // time = hightscore
+    }
+    // Fähigkeit aktiviert wenn value gleich true
+    private void changeFaehigkeitenActive(string key, bool activ)
+    {
+        abilityActive_global[key] = activ;
+    } 
+
+    // XP Methoden
+    private int getXP()
+    {
+        return xp;
+    }
+
+    public void setXP(int newXP)
+    {
+        xp = newXP;
+    }
+
+    public void addToXP(int value)
+    {
+        xp += value;
+    }
+
+    public void subToXP(int value)
+    {
+        xp -= value;
+    }
+
+    // Anzahl der Menschen
+    public int getAnzMenschen()
+    {
+        return Spawner.getHumans().Length;
+    }
+
+    // Anzahl der gedrag und dropten Menschen
+    public int getMaxDragDrop()
+    {
+        return MouseInputHandler.num_max_humans;
+    }
+
+    public void setMaxDragDrp(int value)
+    {
+        MouseInputHandler.num_max_humans = value;
+    }
+}
