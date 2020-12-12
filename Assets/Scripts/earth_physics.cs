@@ -6,20 +6,27 @@ using UnityEngine;
 public class earth_physics : MonoBehaviour
 {
 
-    private Spawner s;
 
     public double neigung;
 
     private const float max_neigung = 30f;
-    private const float neutralizer = 385.3f;
 
     public Rigidbody2D rb;
+
+    private float center;
+    private float xsize;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb.freezeRotation = true;
         rb = GetComponent<Rigidbody2D>();
+        Debug.Log("start");
+        center = GetComponent<Renderer>().bounds.center.x;
+        xsize = GetComponent<Renderer>().bounds.extents.x;
+        Debug.Log(xsize);
+        Debug.Log(transform.position.x);
     }
 
     // Update is called once per frame
@@ -28,11 +35,13 @@ public class earth_physics : MonoBehaviour
         neigung = 0;
         foreach(GameObject g in Spawner.getHumans())
         {
-            Debug.Log("Human detektet");
+            //Debug.Log("Human detektet");
             float tmp = g.transform.position.x;
-            Debug.Log(tmp);
-            neigung += (tmp - neutralizer);
+            //Debug.Log(tmp);
+            Debug.Log(tmp - transform.position.x);
+            neigung += (tmp - transform.position.x);
         }
-        rb.rotation = (float)(Math.Asin(neigung / (2 * 560)));
+        
+        rb.rotation = (float) -neigung ;
     }
 }
