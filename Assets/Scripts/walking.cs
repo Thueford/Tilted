@@ -32,6 +32,7 @@ public class walking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        speed += 0.001f;
         if(rb.transform.position.y == y && ((rb.transform.position.x < bndEarth.max.x) && (rb.transform.position.x > bndEarth.min.x)))
         {
             rb.transform.position = new Vector2(rb.transform.position.x, y);
@@ -72,17 +73,18 @@ public class walking : MonoBehaviour
             }
         }
         /*winkel = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<Rigidbody2D>().rotation;
-        Debug.Log("Winkel: " + winkel);
-        if ((rand.NextDouble() * 60) < winkel)
+        Debug.Log("Winkel: " + winkel);*/
+        winkel = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<earth_physics>().cAngle;
+        if ((rand.NextDouble() * 150) < 2 * Math.Abs(winkel))
         {
             if (winkel < 0)
             {
-                right = false;
+                right = true;
             } else
             {
-                right = true;
+                right = false;
             }
-        }*/
+        }
 
     }
     public void moveY(float y)

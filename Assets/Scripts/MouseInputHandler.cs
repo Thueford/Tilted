@@ -6,7 +6,7 @@ public class MouseInputHandler : MonoBehaviour
 {
     public static MouseInputHandler Instance;
 
-    private Vector3 mouse_position;
+    public static Vector3 mouse_position;
     private List<GameObject> picked = new List<GameObject>();
 
     public AudioSource audioSource;
