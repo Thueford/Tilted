@@ -11,6 +11,8 @@ public class Skill : MonoBehaviour
     public bool run_skill = false;
     public float time_testcool_down = 5f;
     public float time;
+    public AudioSource audioSource;
+    public AudioClip[] audioClips;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -28,7 +30,7 @@ public class Skill : MonoBehaviour
     }
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -42,6 +44,7 @@ public class Skill : MonoBehaviour
             /////////////////////////
             if (time <= 0)
             {
+                ability[currentSkill].DynamicInvoke("end");
                 run_skill = false;
             }
         }
@@ -49,7 +52,12 @@ public class Skill : MonoBehaviour
 
     public void runAbility()
     {
-        ability[currentSkill].DynamicInvoke("test");
+        ability[currentSkill].DynamicInvoke("begin");
+    }
+
+    public bool isAvailable()
+    {
+        return true;
     }
 
     private bool freeze(string a)
@@ -57,8 +65,21 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
+        if (a == "begin")
+        {
+            //Sound wird gespielt
+            audioSource.PlayOneShot(audioClips[0], 1f);
 
-        Skill.skill.time = Skill.skill.time_testcool_down;
+            //value is in playattr in futur
+            Time.timeScale = 0.3f;
+            Skill.skill.time = Skill.skill.time_testcool_down;
+        } else
+        {
+            //reset timescale
+            Time.timeScale = 1f;
+            //run after over
+        }
+
         return false;
     }
     private bool shockwave (string a)
