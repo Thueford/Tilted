@@ -19,7 +19,8 @@ public class Skill : MonoBehaviour
         BEGIN, UPDATE, END
     }
 
-    public float sw_radius; 
+    public float shock_radius;
+    public float magnet_radius;
 
     // Start is called before the first frame update
     private void Awake()
@@ -102,7 +103,7 @@ public class Skill : MonoBehaviour
         {
             Debug.Log("SHOCKWAVE");
             Vector2 shockwavepos = MouseInputHandler.mouse_position;
-            Collider[] human = Physics.OverlapSphere(shockwavepos, sw_radius);
+            Collider[] human = Physics.OverlapSphere(shockwavepos, shock_radius);
         }
         return false;
     }
@@ -122,8 +123,9 @@ public class Skill : MonoBehaviour
         {
             time = time_testcool_down;
         }
-        else if (status == Status.END)
+        else if (status == Status.UPDATE)
         {
+            GameObject[] l = playerattribute.getNearestMouseHumans();
 
         }
 

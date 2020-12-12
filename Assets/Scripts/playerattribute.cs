@@ -38,6 +38,13 @@ public class playerattribute : MonoBehaviour
         
     }
 
+    public static GameObject[] getNearestMouseHumans()
+    {
+        GameObject[] l = Spawner.getHumans();
+        System.Array.Sort(l, (a, b) => MouseInputHandler.getMouseDistance(a) < MouseInputHandler.getMouseDistance(b) ? -1 : 1 );
+        return l;
+    }
+
     public void useSkill(string key)
     {
         //gets called from keyhandler and checks if ability is useable if true then use when mouseclicked?
