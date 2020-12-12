@@ -42,6 +42,7 @@ public class Skill : MonoBehaviour
             /////////////////////////
             if (time <= 0)
             {
+                ability[currentSkill].DynamicInvoke("end");
                 run_skill = false;
             }
         }
@@ -49,7 +50,7 @@ public class Skill : MonoBehaviour
 
     public void runAbility()
     {
-        ability[currentSkill].DynamicInvoke("test");
+        ability[currentSkill].DynamicInvoke("begin");
     }
 
     private bool freeze(string a)
@@ -57,8 +58,18 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
+        if (a == "begin")
+        {
+            //value is in playattr in futur
+            Time.timeScale = 0.3f;
+            Skill.skill.time = Skill.skill.time_testcool_down;
+        } else
+        {
+            //reset timescale
+            Time.timeScale = 1f;
+            //run after over
+        }
 
-        Skill.skill.time = Skill.skill.time_testcool_down;
         return false;
     }
     private bool shockwave (string a)
