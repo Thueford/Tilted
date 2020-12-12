@@ -18,6 +18,6 @@ public class Destroyer : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D c)
     {
-        Destroy(gameObject);
+        Spawner.killHumans(c.gameObject);
     }
 }

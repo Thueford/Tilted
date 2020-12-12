@@ -889,9 +889,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1801636211}
   - component: {fileID: 1801636214}
-  - component: {fileID: 1801636213}
   - component: {fileID: 1801636212}
   - component: {fileID: 1801636215}
+  - component: {fileID: 1801636213}
   m_Layer: 0
   m_Name: flat earth
   m_TagString: Untagged
@@ -934,8 +934,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!61 &1801636213
-BoxCollider2D:
+--- !u!68 &1801636213
+EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -947,19 +947,32 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.063658, y: 0.058764458}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 14.43, y: 4.56}
-    newSize: {x: 50, y: 50}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 14.053759, y: 4.5620384}
+  m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
+  m_Points:
+  - {x: -6.846114, y: 0.54207647}
+  - {x: -7.0252876, y: 0.23124781}
+  - {x: -7.0003324, y: -0.19463415}
+  - {x: -6.805199, y: -0.47482485}
+  - {x: -6.248229, y: -0.9727938}
+  - {x: -5.647389, y: -1.2654872}
+  - {x: -4.980101, y: -1.4841908}
+  - {x: -4.181512, y: -1.5575036}
+  - {x: -3.2549794, y: -1.7092988}
+  - {x: -2.4543817, y: -1.8399364}
+  - {x: -1.5202374, y: -1.9539052}
+  - {x: -0.66451824, y: -1.9942547}
+  - {x: 0.40313876, y: -2.0525928}
+  - {x: 1.3858985, y: -2.0359461}
+  - {x: 2.3378832, y: -1.9525609}
+  - {x: 3.3042276, y: -1.8379301}
+  - {x: 4.452167, y: -1.6143031}
+  - {x: 5.538351, y: -1.3046669}
+  - {x: 6.583035, y: -0.782896}
+  - {x: 6.9821343, y: -0.41206667}
+  - {x: 7.0717907, y: -0.15498997}
+  - {x: 7.0764623, y: 0.30789316}
+  - {x: 7.0100307, y: 0.45295593}
 --- !u!212 &1801636214
 SpriteRenderer:
   m_ObjectHideFlags: 0
