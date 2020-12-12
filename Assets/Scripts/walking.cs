@@ -17,6 +17,8 @@ public class walking : MonoBehaviour
     public float speed;
 
     public bool right;
+
+    private bool Bergsteiger;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,7 @@ public class walking : MonoBehaviour
 
 
         if (rand.Next(2) == 0) { right = false; } else { right = true; }
+        if (rand.Next(10) < 4) { Bergsteiger = true; } else { Bergsteiger = false; }
         on_earth = false;
     }
 
@@ -75,7 +78,7 @@ public class walking : MonoBehaviour
         /*winkel = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<Rigidbody2D>().rotation;
         Debug.Log("Winkel: " + winkel);*/
         winkel = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<earth_physics>().cAngle;
-        if ((rand.NextDouble() * 150) < 2 * Math.Abs(winkel))
+        if (!Bergsteiger && (rand.NextDouble() * 100) < Math.Abs(winkel))
         {
             if (winkel < 0)
             {
