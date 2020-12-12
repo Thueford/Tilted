@@ -13,6 +13,9 @@ public class earth_physics : MonoBehaviour
 
     public Rigidbody2D rb;
 
+    public AudioSource audioSource;
+    public AudioClip[] audioClips;
+
     private float xcenter;
     private float ycenter;
     private float xsize;
@@ -41,8 +44,8 @@ public class earth_physics : MonoBehaviour
         {
             if (g.transform.position.y < ycenter+ysize && g.transform.position.y > ycenter-ysize) {
                 float tmp = g.transform.position.x;
-                
-                
+
+
                 neigung += (tmp - transform.position.x);
             }
         }
@@ -52,12 +55,21 @@ public class earth_physics : MonoBehaviour
     private void adjust_angle(float n)
     {
         //Debug.Log("Winkel: " + n);
-        if (rb.rotation < n-4) { 
-            rb.transform.Rotate(new Vector3(0, 0, 0.5f * Time.deltaTime * 0.8f)); 
+
+        if (rb.rotation < n-4) {
+            rb.transform.Rotate(new Vector3(0, 0, 0.5f * Time.deltaTime * 0.8f));
+            playTiltSound();
         } else if(rb.rotation > n+4)
         {
             rb.transform.Rotate(new Vector3(0, 0, -0.5f * Time.deltaTime * 0.8f));
+            playTiltSound();
         }
-        
+
+    }
+
+    private void playTiltSound() {
+        if (!audioSource.isPlaying) {
+            audioSource.PlayOneShot(audioClips[new System.Random().Next(0, audioClips.Length)], 0.6f);
+        }
     }
 }
