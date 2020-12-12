@@ -43,9 +43,11 @@ public class MouseInputHandler : MonoBehaviour
             if (Skill.skill.currentSkill != "")
             {
                 //sets start var true
-                Skill.skill.runAbility();
-                Skill.skill.run_skill = true;
-
+                if (Skill.skill.isAvailable())
+                {
+                    Skill.skill.runAbility();
+                    Skill.skill.run_skill = true;
+                }
             }
             System.Array.Sort(humans, (a, b) => { return Vector3.Distance(a.transform.position, mouse_position) < Vector3.Distance(b.transform.position, mouse_position) ? -1 : 1; });
 

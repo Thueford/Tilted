@@ -52,6 +52,11 @@ public class Skill : MonoBehaviour
     {
         ability[currentSkill].DynamicInvoke("begin");
     }
+    
+    public bool isAvailable()
+    {
+        return true;
+    }
 
     private bool freeze(string a)
     {
