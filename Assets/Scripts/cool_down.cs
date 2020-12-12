@@ -36,9 +36,10 @@ public class cool_down : MonoBehaviour
         {
             time -= Time.deltaTime;
             GetComponent<Image>().fillAmount = time / cooldown_time;
-            txtTime.text = time.ToString("F") + " Sek.";
+            txtTime.text = time.ToString("F");
         } else
         {
+            txtTime.text = "0.00";
             keystat = false;
             time = cooldown_time;
             available = true;
