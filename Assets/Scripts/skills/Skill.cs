@@ -13,6 +13,9 @@ public class Skill : MonoBehaviour
     public float time;
     public AudioSource audioSource;
     public AudioClip[] audioClips;
+
+    public float sw_radius; 
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -25,7 +28,8 @@ public class Skill : MonoBehaviour
 
         ability = new Dictionary<string, Func<string, bool> >()
         {
-            {"Freeze", freeze}
+            {"Freeze", freeze},
+            {"Shockwave", shockwave}
         };
     }
     void Start()
@@ -87,6 +91,12 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
+        if(a == "begin")
+        {
+            Debug.Log("SHOCKWAVE");
+            Vector2 shockwavepos = MouseInputHandler.mouse_position;
+            Collider[] human = Physics.OverlapSphere(shockwavepos, sw_radius);
+        }
         return false;
     }
     private bool wall(string a)
