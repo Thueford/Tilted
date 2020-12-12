@@ -46,7 +46,10 @@ public class MouseInputHandler : MonoBehaviour
                 Debug.Log(Vector3.Distance(humans[i].transform.position, mouse_position));
                 if (Vector3.Distance(humans[i].transform.position, mouse_position) <= pickup_radius)
                 {
-                    //Debug.Log(distanceOf(humans[i].transform.position, mouse_position)); 
+                    /////////////////////////////////////////
+                    ////////    ADD SOUNDS HERE    //////////
+                    /////////////////////////////////////////
+
                     picked.Add(humans[i]);
                     Debug.Log("pick");
                 }
