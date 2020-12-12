@@ -23,10 +23,12 @@ public class pause : MonoBehaviour
     public void enterPause()
     {
         panel.gameObject.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void endPause()
     {
         panel.gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 }
