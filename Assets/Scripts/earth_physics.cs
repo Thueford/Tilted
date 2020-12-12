@@ -7,6 +7,9 @@ public class earth_physics : MonoBehaviour
     public float cAngle;
     public float tAngle;
 
+    public AudioSource audioSource;
+    public AudioClip[] audioClips;
+
     private const float max_neigung = 30f;
 
     public Rigidbody2D rb;
