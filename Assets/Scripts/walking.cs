@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class walking : MonoBehaviour
     private static System.Random rand = new System.Random();
     public Rigidbody2D rb;
 
+    public float speed;
+
     public bool right;
     // Start is called before the first frame update
     void Start()
@@ -17,7 +20,8 @@ public class walking : MonoBehaviour
         y = (float)rand.NextDouble() * bndEarth.size.y + bndEarth.min.y;
         rb = GetComponent<Rigidbody2D>();
 
-        right = false;
+        if (rand.Next(2) == 0) { right = false; } else { right = true; }
+        
     }
 
     // Update is called once per frame
@@ -36,16 +40,22 @@ public class walking : MonoBehaviour
         }
         if (right)
         {
-            rb.velocity = new Vector2(5f, rb.velocity.y);
+            rb.velocity = new Vector2(speed, rb.velocity.y);
         } else
         {
-            rb.velocity = new Vector2(-5f, rb.velocity.y);
+            rb.velocity = new Vector2(-speed, rb.velocity.y);
         }
         
     }
     public void moveY(float y)
     {
         if(bndEarth.max.y>y && bndEarth.min.y < y) { this.y = y; }
+    }
+
+    public void OnTriggerEnter2D()
+    {
+        right = !right;
+
     }
 
 }
