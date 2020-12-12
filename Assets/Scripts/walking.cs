@@ -19,6 +19,8 @@ public class walking : MonoBehaviour
     public bool right;
 
     private bool Bergsteiger;
+
+    private float last_collision;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +32,7 @@ public class walking : MonoBehaviour
         if (rand.Next(2) == 0) { right = false; } else { right = true; }
         if (rand.Next(10) < 4) { Bergsteiger = true; } else { Bergsteiger = false; }
         on_earth = false;
+        last_collision = 0;
     }
 
     // Update is called once per frame
@@ -78,7 +81,7 @@ public class walking : MonoBehaviour
         /*winkel = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<Rigidbody2D>().rotation;
         Debug.Log("Winkel: " + winkel);*/
         winkel = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<earth_physics>().cAngle;
-        if (!Bergsteiger && (rand.NextDouble() * 100) < Math.Abs(winkel))
+        if (!Bergsteiger && (rand.NextDouble() * 100) < Math.Abs(winkel) && last_collision < 0)
         {
             if (winkel < 0)
             {
@@ -88,7 +91,7 @@ public class walking : MonoBehaviour
                 right = false;
             }
         }
-
+        last_collision -= 0.5f;
     }
     public void moveY(float y)
     {
@@ -109,6 +112,7 @@ public class walking : MonoBehaviour
             y-=2;
         }
         moveY(tmpY - y);
+        last_collision = 5;
     }
 
     public void OnTriggerExit2D()
