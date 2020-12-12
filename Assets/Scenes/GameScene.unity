@@ -314,6 +314,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 784835832}
     m_Modifications:
+    - target: {fileID: 8326060210884041465, guid: cb7e8c89d59a14c44a233a3086fb9639,
+        type: 3}
+      propertyPath: key
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 8326060212048841010, guid: cb7e8c89d59a14c44a233a3086fb9639,
         type: 3}
       propertyPath: m_Name
@@ -720,7 +725,7 @@ RectTransform:
   m_Children:
   - {fileID: 545936568}
   m_Father: {fileID: 784835832}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -861,6 +866,7 @@ RectTransform:
   - {fileID: 1520069755}
   - {fileID: 1975347524}
   - {fileID: 435707904}
+  - {fileID: 637503451}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1267,6 +1273,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 784835832}
     m_Modifications:
+    - target: {fileID: 8326060210884041465, guid: cb7e8c89d59a14c44a233a3086fb9639,
+        type: 3}
+      propertyPath: key
+      value: 97
+      objectReference: {fileID: 0}
     - target: {fileID: 8326060212048841010, guid: cb7e8c89d59a14c44a233a3086fb9639,
         type: 3}
       propertyPath: m_Name
@@ -1730,6 +1741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cAngle: 0
   tAngle: 0
+  diff: 0
   audioSource: {fileID: 1801636216}
   audioClips:
   - {fileID: 8300000, guid: b9efa2b258604b041a948952e5bf5f7e, type: 3}
@@ -2327,6 +2339,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 784835832}
     m_Modifications:
+    - target: {fileID: 8326060210884041465, guid: cb7e8c89d59a14c44a233a3086fb9639,
+        type: 3}
+      propertyPath: key
+      value: 121
+      objectReference: {fileID: 0}
     - target: {fileID: 8326060212048841010, guid: cb7e8c89d59a14c44a233a3086fb9639,
         type: 3}
       propertyPath: m_Name
@@ -2493,6 +2510,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 784835832}
     m_Modifications:
+    - target: {fileID: 8326060210884041465, guid: cb7e8c89d59a14c44a233a3086fb9639,
+        type: 3}
+      propertyPath: key
+      value: 113
+      objectReference: {fileID: 0}
     - target: {fileID: 8326060212048841010, guid: cb7e8c89d59a14c44a233a3086fb9639,
         type: 3}
       propertyPath: m_Name
