@@ -66,7 +66,7 @@ public class Spawner : MonoBehaviour
     {
         // UnityEngine.Debug.Log("Spawn Human at " + x + ", " + y);
         GameObject o = Instantiate(pfHuman, new Vector3(x, y, 0), Quaternion.identity);
-        o.transform.localScale = new Vector3(0.25f, 0.4f, 0);
+        o.transform.localScale = new Vector3(2.3f, 3.5f, 0);
         humans.Add(o);
     }
 }
