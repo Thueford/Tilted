@@ -1113,13 +1113,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6077788dc1b428f49ab9510c6e0dd7ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neigung: 0
-  rb: {fileID: 1801636212}
+  cAngle: 0
+  tAngle: 0
   audioSource: {fileID: 1801636216}
   audioClips:
   - {fileID: 8300000, guid: b9efa2b258604b041a948952e5bf5f7e, type: 3}
   - {fileID: 8300000, guid: 58166cfbb2101a345a9df685d01ba8f2, type: 3}
   - {fileID: 8300000, guid: 52c5aebeaffd05a45b8dc8dd52371888, type: 3}
+  rb: {fileID: 1801636212}
 --- !u!82 &1801636216
 AudioSource:
   m_ObjectHideFlags: 0
