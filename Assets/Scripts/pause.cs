@@ -39,6 +39,11 @@ public class pause : MonoBehaviour
 
     public void Exit()
     {
+        playClickSound();
         SceneManager.LoadScene("StartScene");
+    }
+
+    private void playClickSound() {
+        audioSource.PlayOneShot(audioClips[new System.Random().Next(0, audioClips.Length)], 1f);
     }
 }
