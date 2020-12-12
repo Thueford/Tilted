@@ -33,6 +33,14 @@ public class MouseInputHandler : MonoBehaviour
             mouse_position = Camera.main.ScreenToWorldPoint(mouse_position);
             mouse_position.z = 0;
 
+
+            if (Skill.skill.currentSkill != "")
+            {
+                //sets start var true
+                Skill.skill.run_skill = true;
+
+            }
+
             //Debug.Log("Distance: ");
             //System.Array.Sort(humans, (a, b) => { return distanceOf(a.transform.position, mouse_position) < distanceOf(b.transform.position, mouse_position) ? -1 : 1; });
             System.Array.Sort(humans, (a, b) => { return Vector3.Distance(a.transform.position, mouse_position) < Vector3.Distance(b.transform.position, mouse_position) ? -1 : 1; });
@@ -43,12 +51,15 @@ public class MouseInputHandler : MonoBehaviour
             //Debug.Log(humans[0].transform.position);
             for (int i = 0; i<num_max_humans; i++)
             {
-                Debug.Log(Vector3.Distance(humans[i].transform.position, mouse_position));
-                if (Vector3.Distance(humans[i].transform.position, mouse_position) <= pickup_radius)
+                //Debug.Log(Vector3.Distance(humans[i].transform.position, mouse_position));
+                if (humans.Length >= i)
                 {
-                    //Debug.Log(distanceOf(humans[i].transform.position, mouse_position)); 
-                    picked.Add(humans[i]);
-                    Debug.Log("pick");
+                    if (Vector3.Distance(humans[i].transform.position, mouse_position) <= pickup_radius)
+                    {
+                        //Debug.Log(distanceOf(humans[i].transform.position, mouse_position)); 
+                        picked.Add(humans[i]);
+                        Debug.Log("pick");
+                    }
                 }
             }
         }
