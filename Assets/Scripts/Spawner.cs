@@ -14,17 +14,21 @@ public class Spawner : MonoBehaviour
     private static Bounds bndEarth;
     private static List<GameObject> humans = new List<GameObject>();
     private static System.Random rand = new System.Random();
+    private static AudioClip audioClips;
+    private static AudioSource audioSource;
 
     public static int wavePeriod = 1024;
     public static int waveVary = 512;
     public static int waveAmount = 5;
-
     // Start is called before the first frame update
     void Start()
     {
         if (prefabs.Length != prefabProb.Length)
             throw new AssertionException("prefabs.Length != prefabProb.Length", "Turtle.Spawner prefabs must have same length as prefabProb");
         //Debug.Assert(prefabs.Length == prefabProb.Length, "Turtle.Spawner prefabs must have same length as prefabProb.");
+        // audioSource = new AudioSource();
+        // audioClips = Resources.Load("Sounds/human_spawn_1") as AudioClip;
+        // audioSource.clip = audioClips;
 
         GameObject[] tmp = GameObject.FindGameObjectsWithTag("Earth");
         if (tmp.Length == 0) throw new NullReferenceException("Earth not found.");
@@ -49,7 +53,7 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private IEnumerator spawnWave()
