@@ -17,4 +17,13 @@ public class Humanometer : MonoBehaviour
     {
         kt.text = "Humans: " + Spawner.getHumans().Length;
     }
+
+    public void OnDestroy()
+    {
+        if(PlayerPrefs.GetInt("Highscore") < Spawner.getHumans().Length || !PlayerPrefs.HasKey("Highscore"))
+        {
+            Debug.Log("Saved new Highscore");
+            PlayerPrefs.SetInt("Highscore", Spawner.getHumans().Length);
+        }
+    }
 }

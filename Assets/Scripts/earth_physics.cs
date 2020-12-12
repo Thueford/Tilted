@@ -6,6 +6,7 @@ public class earth_physics : MonoBehaviour
 
     public float cAngle;
     public float tAngle;
+    public float diff;
 
     public AudioSource audioSource;
     public AudioClip[] audioClips;
@@ -40,19 +41,22 @@ public class earth_physics : MonoBehaviour
                 count++;
             }
         }
-        if(count > 0) adjust_angle((float) -neigung/(count*bounds.extents.x));
+        if(count > 0) adjust_angle(-neigung/(count*bounds.extents.x));
     }
 
     private void adjust_angle(float n)
     {
         tAngle = (float)(180 * Math.Asin(n < -1 ? -1 : n > 1 ? 1 : n) / Math.PI);
         cAngle = rb.transform.rotation.eulerAngles.z;
-        float diff = Math.Sign(tAngle - cAngle) * (float)Math.Pow(tAngle - cAngle, 2);
+        if (cAngle > 180) cAngle -= 360;
+        diff = Math.Sign(tAngle - cAngle) * (float)Math.Pow(tAngle - cAngle, 2);
         rb.transform.Rotate(new Vector3(0, 0, 0.3f * diff * Time.deltaTime));
-        playTiltSound();
+        // Debug.Log(string.Format("{0} {1} {2} {3} ", tAngle, cAngle, diff, Time.deltaTime));
+        diff = Math.Abs(1000 * diff * Time.deltaTime);
+        if (diff > 40) playTiltSound();
     }
 
-    private void playTiltSound() {
+    private void playTiltSound(int n = 0) {
         if (!audioSource.isPlaying) {
             audioSource.PlayOneShot(audioClips[new System.Random().Next(0, audioClips.Length)], 0.6f);
         }
