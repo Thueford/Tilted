@@ -9,7 +9,9 @@ public class earth_physics : MonoBehaviour
     public float diff;
 
     public AudioSource audioSource;
+    public AudioSource walkSource;
     public AudioClip[] audioClips;
+    public AudioClip[] walkSounds;
 
     private const float max_neigung = 30f;
 
@@ -39,6 +41,7 @@ public class earth_physics : MonoBehaviour
             if(w.on_earth) { //(g.transform.position.y < bounds.max.y && g.transform.position.y > bounds.min.y) {
                 neigung += g.transform.position.x - bounds.center.x;
                 count++;
+                playWalkSound();
             }
         }
         if(count > 0) adjust_angle(-neigung/(count*bounds.extents.x));
@@ -58,7 +61,13 @@ public class earth_physics : MonoBehaviour
 
     private void playTiltSound(int n = 0) {
         if (!audioSource.isPlaying) {
-            audioSource.PlayOneShot(audioClips[new System.Random().Next(0, audioClips.Length)], 0.6f);
+            audioSource.PlayOneShot(audioClips[new System.Random().Next(0, audioClips.Length)], 0.4f);
+        }
+    }
+
+    private void playWalkSound() {
+        if (!walkSource.isPlaying) {
+            walkSource.PlayOneShot(walkSounds[1], 0.5f);
         }
     }
 
