@@ -40,23 +40,15 @@ public class MouseInputHandler : MonoBehaviour
                 Skill.skill.run_skill = true;
 
             }
-
-            //Debug.Log("Distance: ");
-            //System.Array.Sort(humans, (a, b) => { return distanceOf(a.transform.position, mouse_position) < distanceOf(b.transform.position, mouse_position) ? -1 : 1; });
             System.Array.Sort(humans, (a, b) => { return Vector3.Distance(a.transform.position, mouse_position) < Vector3.Distance(b.transform.position, mouse_position) ? -1 : 1; });
 
-
-            //Debug.Log("---------------------------");
-            //Debug.Log(distanceOf(humans[0].transform.position, mouse_position));
-            //Debug.Log(humans[0].transform.position);
             for (int i = 0; i<num_max_humans; i++)
             {
-                //Debug.Log(Vector3.Distance(humans[i].transform.position, mouse_position));
                 if (humans.Length >= i)
                 {
                     if (Vector3.Distance(humans[i].transform.position, mouse_position) <= pickup_radius)
                     {
-                        //Debug.Log(distanceOf(humans[i].transform.position, mouse_position)); 
+                        ///INPUT SOUND HERE///
                         picked.Add(humans[i]);
                         Debug.Log("pick");
                     }
@@ -83,7 +75,6 @@ public class MouseInputHandler : MonoBehaviour
                 npos.y = mouse_position.y;
                 npos.z = 0;
                 g.transform.position = npos;
-                //Debug.Log(g.transform.position);
             }
         }
     }

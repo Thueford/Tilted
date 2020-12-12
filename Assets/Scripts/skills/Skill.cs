@@ -7,7 +7,7 @@ public class Skill : MonoBehaviour
 {
     public Dictionary<string, Func<string, bool>> ability;
     public static Skill skill;
-    public string currentSkill = null;
+    public string currentSkill = "";
     public bool run_skill = false;
     public float time_testcool_down = 5f;
     public float time;
