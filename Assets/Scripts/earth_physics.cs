@@ -42,6 +42,21 @@ public class earth_physics : MonoBehaviour
             neigung += (tmp - transform.position.x);
         }
         
-        rb.rotation = (float) -neigung ;
+        adjust_angle((float) -neigung );
+    }
+
+    private void adjust_angle(float n)
+    {
+        if (rb.rotation < neigung)
+        {
+                rb.rotation += 1;
+        } else if (rb.rotation > neigung)
+        {
+            rb.rotation -= 1;
+        }
+        else
+        {
+            rb.rotation = rb.rotation;
+        }
     }
 }
