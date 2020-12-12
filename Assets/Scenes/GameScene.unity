@@ -1035,6 +1035,7 @@ GameObject:
   - component: {fileID: 1899816064}
   - component: {fileID: 1899816065}
   - component: {fileID: 1899816066}
+  - component: {fileID: 1899816063}
   m_Layer: 0
   m_Name: "Schildkr\xF6te"
   m_TagString: Untagged
@@ -1172,9 +1173,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b105947ef2ef92e4c8d254003ff1295f, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  pfHuman: {fileID: 2779166832132551719, guid: 022f7946df68b5346b125fed0ce8e82c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 2779166832132551719, guid: 022f7946df68b5346b125fed0ce8e82c, type: 3}
+  prefabProb: 05000000
 --- !u!114 &1899816066
 MonoBehaviour:
   m_ObjectHideFlags: 0
