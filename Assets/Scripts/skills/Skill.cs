@@ -11,6 +11,8 @@ public class Skill : MonoBehaviour
     public bool run_skill = false;
     public float time_testcool_down = 5f;
     public float time;
+    public AudioSource audioSource;
+    public AudioClip[] audioClips;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -28,7 +30,7 @@ public class Skill : MonoBehaviour
     }
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -52,7 +54,7 @@ public class Skill : MonoBehaviour
     {
         ability[currentSkill].DynamicInvoke("begin");
     }
-    
+
     public bool isAvailable()
     {
         return true;
@@ -65,6 +67,9 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         if (a == "begin")
         {
+            //Sound wird gespielt
+            audioSource.PlayOneShot(audioClips[0], 1f);
+
             //value is in playattr in futur
             Time.timeScale = 0.3f;
             Skill.skill.time = Skill.skill.time_testcool_down;
