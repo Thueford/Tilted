@@ -15,6 +15,7 @@ public class earth_physics : MonoBehaviour
 
     private float center;
     private float xsize;
+    private float ysize;
 
 
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class earth_physics : MonoBehaviour
         Debug.Log("start");
         center = GetComponent<Renderer>().bounds.center.x;
         xsize = GetComponent<Renderer>().bounds.extents.x;
+        ysize = GetComponent<Renderer>().bounds.extents.y;
         Debug.Log(xsize);
         Debug.Log(transform.position.x);
     }
@@ -33,30 +35,27 @@ public class earth_physics : MonoBehaviour
     void Update()
     {
         neigung = 0;
-        foreach(GameObject g in Spawner.getHumans())
+        foreach (GameObject g in Spawner.getHumans())
         {
-            //Debug.Log("Human detektet");
-            float tmp = g.transform.position.x;
-            //Debug.Log(tmp);
-            Debug.Log(tmp - transform.position.x);
-            neigung += (tmp - transform.position.x);
+            if (g.transform.position.y < center+ysize && g.transform.position.y > center-ysize) {
+                float tmp = g.transform.position.x;
+                
+                
+                neigung += (tmp - transform.position.x);
+            }
         }
-        
-        adjust_angle((float) -neigung );
+        adjust_angle((float) -neigung/Spawner.getHumans().Length);
     }
 
     private void adjust_angle(float n)
     {
-        if (rb.rotation < neigung)
+        //Debug.Log("Winkel: " + n);
+        if (rb.rotation < n-4) { 
+            rb.transform.Rotate(new Vector3(0, 0, 0.5f * Time.deltaTime * 0.8f)); 
+        } else if(rb.rotation > n+4)
         {
-                rb.rotation += 1;
-        } else if (rb.rotation > neigung)
-        {
-            rb.rotation -= 1;
+            rb.transform.Rotate(new Vector3(0, 0, -0.5f * Time.deltaTime * 0.8f));
         }
-        else
-        {
-            rb.rotation = rb.rotation;
-        }
+        
     }
 }
