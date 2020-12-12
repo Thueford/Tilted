@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 1894060589607417627}
   - component: {fileID: 1723945607002988555}
   - component: {fileID: 6773489729350198336}
-  m_Layer: 0
+  - component: {fileID: 3396855457965206607}
+  m_Layer: 8
   m_Name: Mensch
   m_TagString: human
   m_Icon: {fileID: 0}
@@ -131,7 +132,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1723945607002988555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,3 +165,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3396855457965206607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2779166832132551719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b7dcb63890b794983841b077d99cd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  y: 0
+  rb: {fileID: 1894060589607417627}
+  right: 0
