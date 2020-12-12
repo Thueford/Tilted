@@ -53,9 +53,7 @@ public class playerattribute : MonoBehaviour
         if (Skill.skill.ability.ContainsKey(key))
         {
             //hier vorher auf icon cooldown checken
-
             //time auf cooldowntime setzten
-            Skill.skill.time = Skill.skill.time_testcool_down;
             Skill.skill.currentSkill = key;
         }
     }

@@ -65,7 +65,7 @@ public class Spawner : MonoBehaviour
         while (true)
         {
 
-            audioSource.PlayOneShot(audioClips[rand.Next(0, audioClips.Length)], 0.8f);
+            //audioSource.PlayOneShot(audioClips[rand.Next(0, audioClips.Length)], 0.8f);
 
             Debug.Log("Spawn " + waveAmount + " Humans");
             for (int i = 0; i < waveAmount; i++)

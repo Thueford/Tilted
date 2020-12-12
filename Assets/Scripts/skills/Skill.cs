@@ -36,8 +36,10 @@ public class Skill : MonoBehaviour
     {
         if (run_skill == true)
         {
-            ability[currentSkill].DynamicInvoke("test");
             time -= Time.deltaTime;
+            /////////////////////////
+            Debug.Log(currentSkill);
+            /////////////////////////
             if (time <= 0)
             {
                 run_skill = false;
@@ -45,12 +47,60 @@ public class Skill : MonoBehaviour
         }
     }
 
-    private bool freeze(string a)
+    public void runAbility()
     {
-
-        Debug.Log("Freeze");
-        return false;
+        ability[currentSkill].DynamicInvoke("test");
     }
 
-    
+    private bool freeze(string a)
+    {
+        ///////////////////////////////
+        ///     ADD SOUND HERE      ///
+        ///////////////////////////////
+
+        Skill.skill.time = Skill.skill.time_testcool_down;
+        return false;
+    }
+    private bool shockwave (string a)
+    {
+        ///////////////////////////////
+        ///     ADD SOUND HERE      ///
+        ///////////////////////////////
+        return false;
+    }
+    private bool wall(string a)
+    {
+        ///////////////////////////////
+        ///     ADD SOUND HERE      ///
+        ///////////////////////////////
+        return false;
+    }
+    private bool magnet(string a)
+    {
+        ///////////////////////////////
+        ///     ADD SOUND HERE      ///
+        ///////////////////////////////
+        return false;
+    }
+    private bool bomb(string a)
+    {
+        ///////////////////////////////
+        ///     ADD SOUND HERE      ///
+        ///////////////////////////////
+        return false;
+    }
+    private bool hillclimber(string a)
+    {
+        ///////////////////////////////
+        ///     ADD SOUND HERE      ///
+        ///////////////////////////////
+        return false;
+    }
+    private bool virus(string a)
+    {
+        ///////////////////////////////
+        ///     ADD SOUND HERE      ///
+        ///////////////////////////////
+        return false;
+    }
 }

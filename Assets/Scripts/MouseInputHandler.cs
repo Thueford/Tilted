@@ -37,6 +37,7 @@ public class MouseInputHandler : MonoBehaviour
             if (Skill.skill.currentSkill != "")
             {
                 //sets start var true
+                Skill.skill.runAbility();
                 Skill.skill.run_skill = true;
 
             }
