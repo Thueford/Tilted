@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour
 {
-    public Dictionary<string, Func<string, bool>> ability;
+    public Dictionary<string, Func<Status, bool>> ability;
     public static Skill skill;
     public string currentSkill = "";
     public bool run_skill = false;
@@ -13,6 +13,11 @@ public class Skill : MonoBehaviour
     public float time;
     public AudioSource audioSource;
     public AudioClip[] audioClips;
+
+    public enum Status
+    {
+        BEGIN, UPDATE, END
+    }
 
     public float sw_radius; 
 
@@ -26,10 +31,11 @@ public class Skill : MonoBehaviour
         }
         skill = this;
 
-        ability = new Dictionary<string, Func<string, bool> >()
+        ability = new Dictionary<string, Func<Status, bool> >()
         {
             {"Freeze", freeze},
-            {"Shockwave", shockwave}
+            {"Shockwave", shockwave},
+            {"magnet", magnet}
         };
     }
     void Start()
@@ -40,15 +46,16 @@ public class Skill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (run_skill == true)
+        if (run_skill)
         {
             time -= Time.deltaTime;
-            /////////////////////////
-            Debug.Log(currentSkill);
-            /////////////////////////
+
+            // Debug.Log(currentSkill);
+            ability[currentSkill].DynamicInvoke(Status.UPDATE);
+
             if (time <= 0)
             {
-                ability[currentSkill].DynamicInvoke("end");
+                ability[currentSkill].DynamicInvoke(Status.END);
                 run_skill = false;
             }
         }
@@ -56,7 +63,7 @@ public class Skill : MonoBehaviour
 
     public void runAbility()
     {
-        ability[currentSkill].DynamicInvoke("begin");
+        ability[currentSkill].DynamicInvoke(Status.BEGIN);
     }
 
     public bool isAvailable()
@@ -64,12 +71,12 @@ public class Skill : MonoBehaviour
         return true;
     }
 
-    private bool freeze(string a)
+    private bool freeze(Status status)
     {
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
-        if (a == "begin")
+        if (status == Status.BEGIN)
         {
             //Sound wird gespielt
             audioSource.PlayOneShot(audioClips[0], 1f);
@@ -77,7 +84,7 @@ public class Skill : MonoBehaviour
             //value is in playattr in futur
             Time.timeScale = 0.3f;
             Skill.skill.time = Skill.skill.time_testcool_down;
-        } else
+        } else if(status == Status.END)
         {
             //reset timescale
             Time.timeScale = 1f;
@@ -86,12 +93,12 @@ public class Skill : MonoBehaviour
 
         return false;
     }
-    private bool shockwave (string a)
+    private bool shockwave (Status status)
     {
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
-        if(a == "begin")
+        if(status == Status.BEGIN)
         {
             Debug.Log("SHOCKWAVE");
             Vector2 shockwavepos = MouseInputHandler.mouse_position;
@@ -99,35 +106,44 @@ public class Skill : MonoBehaviour
         }
         return false;
     }
-    private bool wall(string a)
+    private bool wall(Status status)
     {
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
         return false;
     }
-    private bool magnet(string a)
+    private bool magnet(Status status)
+    {
+        ///////////////////////////////
+        ///     ADD SOUND HERE      ///
+        ///////////////////////////////
+        if (status == Status.BEGIN)
+        {
+            time = time_testcool_down;
+        }
+        else if (status == Status.END)
+        {
+
+        }
+
+        return false;
+    }
+    private bool bomb(Status status)
     {
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
         return false;
     }
-    private bool bomb(string a)
+    private bool hillclimber(Status status)
     {
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
         return false;
     }
-    private bool hillclimber(string a)
-    {
-        ///////////////////////////////
-        ///     ADD SOUND HERE      ///
-        ///////////////////////////////
-        return false;
-    }
-    private bool virus(string a)
+    private bool virus(Status status)
     {
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
