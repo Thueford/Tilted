@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class pause : MonoBehaviour
 {
@@ -36,8 +37,8 @@ public class pause : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    private void playClickSound() {
-        audioSource.PlayOneShot(audioClips[new System.Random().Next(0, audioClips.Length)], 1f);
-        Debug.Log("Player Click");
+    public void Exit()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 }
