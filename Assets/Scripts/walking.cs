@@ -12,7 +12,7 @@ public class walking : MonoBehaviour
 
     private float winkel;
 
-    private bool on_earth;
+    public bool on_earth;
 
     public float speed;
 
@@ -23,7 +23,7 @@ public class walking : MonoBehaviour
         bndEarth = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<Renderer>().bounds;
         rb = GetComponent<Rigidbody2D>();
 
-        
+
 
         if (rand.Next(2) == 0) { right = false; } else { right = true; }
         on_earth = false;
@@ -92,7 +92,7 @@ public class walking : MonoBehaviour
 
     public void OnTriggerEnter2D()
     {
-        right = !right; 
+        right = !right;
         float tmpY = rb.transform.position.y;
         y = (float)rand.NextDouble() * (bndEarth.size.y - 0.3f);
         if (y < 1)

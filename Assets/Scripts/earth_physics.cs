@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class earth_physics : MonoBehaviour
 {
 
+    public float cAngle;
+    public float tAngle;
 
-    public double neigung;
+    public AudioSource audioSource;
+    public AudioClip[] audioClips;
 
     private const float max_neigung = 30f;
 
     public Rigidbody2D rb;
 
-    private float xcenter;
-    private float ycenter;
-    private float xsize;
-    private float ysize;
+    private Bounds bounds;
 
 
     // Start is called before the first frame update
@@ -24,40 +22,40 @@ public class earth_physics : MonoBehaviour
     {
         rb.freezeRotation = true;
         rb = GetComponent<Rigidbody2D>();
-        //Debug.Log("start");
-        xcenter = GetComponent<Renderer>().bounds.center.x;
-        ycenter = GetComponent<Renderer>().bounds.center.y;
-        xsize = GetComponent<Renderer>().bounds.extents.x;
-        ysize = GetComponent<Renderer>().bounds.extents.y;
-        //Debug.Log(xsize);
-        //Debug.Log(transform.position.x);
+        Debug.Log("start");
+        bounds = GetComponent<Renderer>().bounds;
+        Debug.Log(transform.position.x);
     }
 
     // Update is called once per frame
     void Update()
     {
-        neigung = 0;
+        float neigung = 0;
+        int count = 10;
         foreach (GameObject g in Spawner.getHumans())
         {
-            if (g.transform.position.y < ycenter+ysize && g.transform.position.y > ycenter-ysize) {
-                float tmp = g.transform.position.x;
-                
-                
-                neigung += (tmp - transform.position.x);
+            walking w = g.GetComponent<walking>();
+            if(w.on_earth) { //(g.transform.position.y < bounds.max.y && g.transform.position.y > bounds.min.y) {
+                neigung += g.transform.position.x - bounds.center.x;
+                count++;
             }
         }
-        adjust_angle((float) -neigung/Spawner.getHumans().Length);
+        if(count > 0) adjust_angle((float) -neigung/(count*bounds.extents.x));
     }
 
     private void adjust_angle(float n)
     {
-        //Debug.Log("Winkel: " + n);
-        if (rb.rotation < n-4) { 
-            rb.transform.Rotate(new Vector3(0, 0, 0.5f * Time.deltaTime * 0.8f)); 
-        } else if(rb.rotation > n+4)
-        {
-            rb.transform.Rotate(new Vector3(0, 0, -0.5f * Time.deltaTime * 0.8f));
-        }
-        
+        tAngle = (float)(180 * Math.Asin(n < -1 ? -1 : n > 1 ? 1 : n) / Math.PI);
+        cAngle = rb.transform.rotation.eulerAngles.z;
+        float diff = Math.Sign(tAngle - cAngle) * (float)Math.Pow(tAngle - cAngle, 2);
+        rb.transform.Rotate(new Vector3(0, 0, 0.3f * diff * Time.deltaTime));
+        playTiltSound();
     }
+
+    private void playTiltSound() {
+        if (!audioSource.isPlaying) {
+            audioSource.PlayOneShot(audioClips[new System.Random().Next(0, audioClips.Length)], 0.6f);
+        }
+    }
+
 }
