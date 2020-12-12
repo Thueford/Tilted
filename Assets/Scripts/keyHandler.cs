@@ -7,7 +7,6 @@ public class keyHandler : MonoBehaviour
 
     public GameObject cd;
     public cool_down cooldown;
-    public KeyCode key;
 
     // Start is called before the first frame update
     void Start()
@@ -18,9 +17,10 @@ public class keyHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(key) && cooldown.available) 
+        if (Input.GetKey(cooldown.key) && cooldown.available) 
         {
             Debug.Log("Event!!");
         }
+
     }
 }
