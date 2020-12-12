@@ -23,13 +23,16 @@ public class walking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(rb.transform.position.y == y)
+        if(rb.transform.position.y == y && ((rb.transform.position.x < bndEarth.max.x) && (rb.transform.position.x > bndEarth.min.x)))
         {
             rb.transform.position = new Vector2(rb.transform.position.x, y);
             rb.velocity = new Vector2(rb.velocity.x, 0f);
-        } else if (rb.transform.position.y < y)
+        } else if (rb.transform.position.y < y && ((rb.transform.position.x < bndEarth.max.x) && (rb.transform.position.x > bndEarth.min.x)))
         {
             rb.velocity = new Vector2(rb.velocity.x, 0.3f);
+        } else if (((rb.transform.position.x > bndEarth.max.x) && (rb.transform.position.x < bndEarth.min.x)))
+        {
+            rb.velocity = new Vector2(0f, 0f);
         }
         if (right)
         {
