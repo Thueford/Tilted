@@ -10,7 +10,7 @@ public class playerattribute : MonoBehaviour
     public ArrayList highscore;
     public int anzMenschen;
     public int dragDropAnz;
-    public Dictionary<KeyCode, string> keySkill;
+    public Dictionary<KeyCode, Skill.ESkill> keySkill;
 
     private void Awake()
     {
@@ -20,15 +20,15 @@ public class playerattribute : MonoBehaviour
         }
         player = this;
 
-        keySkill = new Dictionary<KeyCode, string>()
+        keySkill = new Dictionary<KeyCode, Skill.ESkill>()
         {
-            {KeyCode.Q, "Freeze"},
-            {KeyCode.W, "Shockwave"},
-            {KeyCode.E, "Wall"},
-            {KeyCode.R, "Magnet"},
-            {KeyCode.T, "Bomb"},
-            {KeyCode.Z, "Hillclimber"},
-            {KeyCode.U, "Virus COV-19"}
+            {KeyCode.Q, Skill.ESkill.FREEZE},
+            {KeyCode.W, Skill.ESkill.SHOCK},
+            {KeyCode.E, Skill.ESkill.WALL},
+            {KeyCode.R, Skill.ESkill.MAGNET},
+            {KeyCode.T, Skill.ESkill.BOMB},
+            {KeyCode.Z, Skill.ESkill.CLIMB},
+            {KeyCode.U, Skill.ESkill.COVID19}
         };
     }
 
@@ -45,7 +45,7 @@ public class playerattribute : MonoBehaviour
         return l;
     }
 
-    public void useSkill(string key)
+    public void useSkill(Skill.ESkill key)
     {
         //gets called from keyhandler and checks if ability is useable if true then use when mouseclicked?
         //if not available return

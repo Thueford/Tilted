@@ -5,18 +5,23 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour
 {
-    public Dictionary<string, Func<Status, bool>> ability;
+    public Dictionary<ESkill, Func<EStatus, bool>> ability;
     public static Skill skill;
-    public string currentSkill = "";
+    public ESkill currentSkill = ESkill.NONE;
     public bool run_skill = false;
     public float time_testcool_down = 5f;
     public float time;
     public AudioSource audioSource;
     public AudioClip[] audioClips;
 
-    public enum Status
+    public enum EStatus
     {
         BEGIN, UPDATE, END
+    }
+
+    public enum ESkill
+    {
+        NONE, FREEZE, SHOCK, WALL, MAGNET, BOMB, CLIMB, COVID19
     }
 
     public float shock_radius;
@@ -32,11 +37,15 @@ public class Skill : MonoBehaviour
         }
         skill = this;
 
-        ability = new Dictionary<string, Func<Status, bool> >()
+        ability = new Dictionary<ESkill, Func<EStatus, bool> >()
         {
-            {"Freeze", freeze},
-            {"Shockwave", shockwave},
-            {"magnet", magnet}
+            {ESkill.FREEZE, freeze},
+            {ESkill.SHOCK, shockwave},
+            {ESkill.WALL, wall},
+            {ESkill.MAGNET, magnet},
+            {ESkill.BOMB, bomb},
+            {ESkill.CLIMB, hillclimber},
+            {ESkill.COVID19, virus}
         };
     }
     void Start()
@@ -52,11 +61,11 @@ public class Skill : MonoBehaviour
             time -= Time.deltaTime;
 
             // Debug.Log(currentSkill);
-            ability[currentSkill].DynamicInvoke(Status.UPDATE);
+            ability[currentSkill].DynamicInvoke(EStatus.UPDATE);
 
             if (time <= 0)
             {
-                ability[currentSkill].DynamicInvoke(Status.END);
+                ability[currentSkill].DynamicInvoke(EStatus.END);
                 run_skill = false;
             }
         }
@@ -64,7 +73,7 @@ public class Skill : MonoBehaviour
 
     public void runAbility()
     {
-        ability[currentSkill].DynamicInvoke(Status.BEGIN);
+        ability[currentSkill].DynamicInvoke(EStatus.BEGIN);
     }
 
     public bool isAvailable()
@@ -72,12 +81,12 @@ public class Skill : MonoBehaviour
         return true;
     }
 
-    private bool freeze(Status status)
+    private bool freeze(EStatus status)
     {
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
-        if (status == Status.BEGIN)
+        if (status == EStatus.BEGIN)
         {
             //Sound wird gespielt
             audioSource.PlayOneShot(audioClips[0], 1f);
@@ -85,7 +94,7 @@ public class Skill : MonoBehaviour
             //value is in playattr in futur
             Time.timeScale = 0.3f;
             Skill.skill.time = Skill.skill.time_testcool_down;
-        } else if(status == Status.END)
+        } else if(status == EStatus.END)
         {
             //reset timescale
             Time.timeScale = 1f;
@@ -94,12 +103,12 @@ public class Skill : MonoBehaviour
 
         return false;
     }
-    private bool shockwave (Status status)
+    private bool shockwave (EStatus status)
     {
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
-        if(status == Status.BEGIN)
+        if(status == EStatus.BEGIN)
         {
             Debug.Log("SHOCKWAVE");
             Vector2 shockwavepos = MouseInputHandler.mouse_position;
@@ -107,45 +116,50 @@ public class Skill : MonoBehaviour
         }
         return false;
     }
-    private bool wall(Status status)
+    private bool wall(EStatus status)
     {
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
         return false;
     }
-    private bool magnet(Status status)
+    private bool magnet(EStatus status)
     {
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
-        if (status == Status.BEGIN)
+        if (status == EStatus.BEGIN)
         {
             time = time_testcool_down;
         }
-        else if (status == Status.UPDATE)
+        else if (status == EStatus.UPDATE)
         {
             GameObject[] l = playerattribute.getNearestMouseHumans();
-
+            int i = 0;
+            float d = MouseInputHandler.getMouseDistance(l[i]);
+            while (d < magnet_radius)
+            {
+                l[i].transform.position += (1 - d / magnet_radius) * (MouseInputHandler.mouse_position - l[i].transform.position);
+            }
         }
 
         return false;
     }
-    private bool bomb(Status status)
+    private bool bomb(EStatus status)
     {
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
         return false;
     }
-    private bool hillclimber(Status status)
+    private bool hillclimber(EStatus status)
     {
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
         return false;
     }
-    private bool virus(Status status)
+    private bool virus(EStatus status)
     {
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
