@@ -7,7 +7,7 @@ public class MouseInputHandler : MonoBehaviour
     public static MouseInputHandler Instance;
     private Vector3 mouse_position;
     private List<GameObject> picked = new List<GameObject>();
-    private int num_max_humans = 2;
+    public static int num_max_humans = 2;
     private int pickup_radius = 15;
 
     void Awake()
