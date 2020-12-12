@@ -44,12 +44,7 @@ public class playerattribute : MonoBehaviour
         //if not available return
 
 
-        Debug.Log("setskill");
-        //MouseInputHandler.Instance.skill = ability[key];
-        //check if is useable
-        //if (cool_down.isAvailable)#
-        //gets skill key from the keydict
-        //string skill = playerattribute.player.keySkill[key];
+        //Debug.Log("setskill");
         if (Skill.skill.ability.ContainsKey(key))
         {
             //hier vorher auf icon cooldown checken
