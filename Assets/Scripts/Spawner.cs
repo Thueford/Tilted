@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class Spawner : MonoBehaviour
 {
@@ -20,7 +22,10 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Assert(prefabs.Length == prefabProb.Length);
+        if (prefabs.Length != prefabProb.Length)
+            throw new AssertionException("prefabs.Length != prefabProb.Length", "Turtle.Spawner prefabs must have same length as prefabProb");
+        //Debug.Assert(prefabs.Length == prefabProb.Length, "Turtle.Spawner prefabs must have same length as prefabProb.");
+
         GameObject[] tmp = GameObject.FindGameObjectsWithTag("Earth");
         if (tmp.Length == 0) throw new NullReferenceException("Earth not found.");
         bndEarth = tmp[0].GetComponent<Renderer>().bounds;
@@ -52,12 +57,12 @@ public class Spawner : MonoBehaviour
         yield return new WaitForSeconds(1);
         while (true)
         {
-            Debug.Log("Spawn " + waveAmount + "Humans");
+            Debug.Log("Spawn " + waveAmount + " Humans");
             for (int i = 0; i < waveAmount; i++)
             {
                 spawnHuman(
-                    bndEarth.min.x + 0.9f * (float)rand.NextDouble() * bndEarth.size.x,
-                    bndEarth.max.y + bndEarth.size.y * 4 + (float)rand.NextDouble() * bndEarth.size.y * 6);
+                    bndEarth.min.x + (float)(0.1 + 0.8 * rand.NextDouble()) * bndEarth.size.x,
+                    bndEarth.max.y + bndEarth.size.y * 6 + (float)rand.NextDouble() * bndEarth.size.y * 2);
             }
 
             yield return new WaitForSeconds(4);
@@ -67,9 +72,7 @@ public class Spawner : MonoBehaviour
     private void spawnHuman(float x, float y)
     {
         int i, tgt = (int)(rand.NextDouble() * prefabProb.Sum());
-        //Debug.Log(tgt);
         for (i = 0; tgt >= prefabProb[i]; ++i) tgt -= prefabProb[i];
-        //Debug.Log(i);
 
         // UnityEngine.Debug.Log("Spawn Human at " + x + ", " + y);
         GameObject o = Instantiate(prefabs[i], new Vector3(x, y, 0), Quaternion.identity);
