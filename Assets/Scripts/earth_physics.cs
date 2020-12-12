@@ -1,8 +1,10 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class earth_physics : MonoBehaviour
 {
+    public static float tiltFactor = 0.3f;
 
     public float cAngle;
     public float tAngle;
@@ -11,7 +13,7 @@ public class earth_physics : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip[] audioClips;
 
-    private const float max_neigung = 30f;
+    private const float max_neigung = 24f;
 
     public Rigidbody2D rb;
 
@@ -50,10 +52,11 @@ public class earth_physics : MonoBehaviour
         cAngle = rb.transform.rotation.eulerAngles.z;
         if (cAngle > 180) cAngle -= 360;
         diff = Math.Sign(tAngle - cAngle) * (float)Math.Pow(tAngle - cAngle, 2);
-        rb.transform.Rotate(new Vector3(0, 0, 0.3f * diff * Time.deltaTime));
+        rb.transform.Rotate(new Vector3(0, 0, tiltFactor * diff * Time.deltaTime));
         // Debug.Log(string.Format("{0} {1} {2} {3} ", tAngle, cAngle, diff, Time.deltaTime));
         diff = Math.Abs(1000 * diff * Time.deltaTime);
         if (diff > 40) playTiltSound();
+        if (cAngle >= max_neigung) SceneManager.LoadScene("GameOverScene");
     }
 
     private void playTiltSound(int n = 0) {
