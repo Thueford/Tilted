@@ -163,14 +163,17 @@ public class Skill : MonoBehaviour
             //Sound wird gespielt
             audioSource.PlayOneShot(audioClips[0], 1f);
             time = time_testcool_down;
-            foreach(GameObject o in playerattribute.getNearestMouseHumans())
+            foreach(GameObject o in playerattribute.getHumansInMouseRange(climb_radius))
             {
-
+                o.GetComponent<walking>().climb = true;
             } 
         } 
         else if (status == EStatus.END)
         {
-            
+            foreach(GameObject o in Spawner.GetHumans())
+            {
+                o.GetComponent<walking>().climb = false;
+            }
         }
 
         return false;
