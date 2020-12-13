@@ -19,6 +19,8 @@ public class Skill : MonoBehaviour
     private GameObject bombPicture;
     private GameObject covidPicture;
 
+    private float bombRadius = 55f;
+
     public enum EStatus
     {
         BEGIN, UPDATE, END
@@ -208,7 +210,18 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         if (status == EStatus.BEGIN)
         {
+
             audioSource.PlayOneShot(audioClips[4], 0.5f);
+            
+            //Vector3 mouse_position = MouseInputHandler.mouse_position;
+
+            foreach (GameObject human in Spawner.getHumans())
+            {
+                if (MouseInputHandler.getMouseDistance(human) <= bombRadius)
+                {
+                    Spawner.killHumans(human);
+                }
+            }
 
             //show bomb picture
             bombPicture.SetActive(true);
@@ -273,6 +286,18 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         audioSource.PlayOneShot(audioClips[7], 0.3f);
         ///////////////////////////////
+
+        /*
+         *
+         *
+         * foreach(GameObject g in Spawner.getHuman()){
+g.GetComponent<walking>().moveX(XCoordOfEarthCenter);
+}
+         *
+         *
+         *
+         */
+
         return false;
     }
 }
