@@ -2,15 +2,18 @@
 
 public class walking : MonoBehaviour
 {
-    public float tx { get; private set; }
-    public float y { get; private set; }
     public static float earthOff = 10;
+    public static int mainDir = -1;
 
     private static Bounds bndEarth;
     private static earth_physics epEarth;
-    private static System.Random rand = new System.Random();
+    public static System.Random rand { get; private set; } = new System.Random();
+
     public Rigidbody2D rb;
     public Vector2 addVelocity = new Vector2(0, 0);
+
+    public float tx { get; private set; }
+    public float y { get; private set; }
 
     public bool on_earth = false;
     public float speed;
@@ -40,7 +43,7 @@ public class walking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        speed += 1f * Time.deltaTime;
+        speed += 0.3f * Time.deltaTime;
         float ytilt = bndEarth.extents.x * Mathf.Sin(epEarth.cAngle);
 
         // default movement
@@ -59,7 +62,7 @@ public class walking : MonoBehaviour
 
         // check for boundings
         // in earth x bounds and on y pos: stop falling
-        if (rb.transform.position.y == y && inRange(rb.transform.position.x, bndEarth.min.x + earthOff, bndEarth.max.x - earthOff))
+        if (rb.transform.position.y <= y && inRange(rb.transform.position.x, bndEarth.min.x + earthOff, bndEarth.max.x - earthOff))
         {
             // rb.transform.position = new Vector2(rb.transform.position.x, y);
             rb.velocity = new Vector2(rb.velocity.x, 0f);
@@ -77,14 +80,14 @@ public class walking : MonoBehaviour
         // for effects
         // rb.velocity += addVelocity;
 
-        
         //change walking directions
-        if (Time.deltaTime * rand.NextDouble() * 1e5 < 1 && on_earth && !climb)
+        if (speed * Time.deltaTime * rand.NextDouble() * 1e3 < 1 && on_earth && !climb)
         {
-            Debug.Log("change walk direction");
-            if (rand.NextDouble() * 100 < 50)
+            double r = rand.NextDouble() * 100;
+            if (r < 50)
             {
-                right = !right;
+                //Debug.Log("change walk direction");
+                right = r < 25 + mainDir * 20;
             }
             else
             {
@@ -92,7 +95,7 @@ public class walking : MonoBehaviour
                 float tmpY = rb.transform.position.y;
                 y = (float)rand.NextDouble() * bndEarth.size.y * 0.1f;
                 if (tmpY >= bndEarth.center.y) y = -y;
-                //y = (float)rand.NextDouble() * (bndEarth.size.y * (0.3f * (float)Math.Pow(-1, rand.Next(2) + 1)));
+                // y = (float)rand.NextDouble() * (bndEarth.size.y * (0.3f * (float)Math.Pow(-1, rand.Next(2) + 1)));
 
                 moveY(tmpY - y);
             }
