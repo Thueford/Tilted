@@ -55,7 +55,7 @@ public class walking : MonoBehaviour
             bool tr = right;
             if (emergency)
             {
-                if(inRange(rb.transform.position.x, emergency_target-2, emergency_target+2))
+                if (inRange(rb.transform.position.x, emergency_target - 2, emergency_target + 2)) emergency = false;
                 tr = rb.transform.position.x < emergency_target;
             }
             rb.velocity = new Vector2(tr ? speed : -speed, rb.velocity.y);
