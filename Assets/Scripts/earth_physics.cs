@@ -16,6 +16,7 @@ public class earth_physics : MonoBehaviour
     public AudioClip[] audioClips, walkSounds;
 
     private const float max_neigung = 20f;
+    public int roMainDir;
 
     public Rigidbody2D rb;
     private Bounds bounds;
@@ -40,6 +41,7 @@ public class earth_physics : MonoBehaviour
     {
         float neigung = 0; // median accumulator
         int count = 10;    // default earth inertia
+
         foreach (GameObject g in Spawner.getHumans())
         {
             if (g.GetComponent<walking>().on_earth) { //(g.transform.position.y < bounds.max.y && g.transform.position.y > bounds.min.y) {
@@ -48,8 +50,14 @@ public class earth_physics : MonoBehaviour
                 playWalkSound();
             }
         }
+
         if(count > 0 && neigung != 0)
             adjust_angle(-neigung/(count*bounds.extents.x));
+
+        // main walking direction
+        if (Time.deltaTime * walking.rand.NextDouble() * 1e6 < 1)
+            walking.mainDir = walking.mainDir == 1 ? -1 : 1;
+        roMainDir = walking.mainDir;
     }
 
     private void adjust_angle(float n)
@@ -57,7 +65,7 @@ public class earth_physics : MonoBehaviour
         // calculate target angle
         tAngle = (float)(180 * Math.Asin(n < -1 ? -1 : n > 1 ? 1 : n) / Math.PI);
         cAngle = rb.transform.rotation.eulerAngles.z;
-        // rotation sux and thinks negative degrees need to be adjusted to 360° 
+        // rotation sux and thinks negative degrees need to be adjusted to 360°
         if (cAngle > 180) cAngle -= 360;
 
         // rotate
@@ -67,6 +75,8 @@ public class earth_physics : MonoBehaviour
         // current tilt based stuff
         diff = Math.Abs(1000 * diff * Time.deltaTime);
         if (diff > 40) playTiltSound();
+
+        // tilt regler position
         temp = bTiltmeter.rect.size * cAngle / (2 * max_neigung);
         bTiltregler.position = bTiltmeter.position + bTiltmeter.right / 2 - new Vector3(temp.x, 0);
         if (Math.Abs(cAngle) >= max_neigung) SceneManager.LoadScene("GameOverScene");
