@@ -8,11 +8,13 @@ public class Skill : MonoBehaviour
     public Dictionary<ESkill, Func<EStatus, bool>> ability;
     public static Skill skill;
     public ESkill currentSkill = ESkill.NONE;
+    public Dictionary<ESkill, float> currentSkills;
     public bool run_skill = false;
     public float time_testcool_down = 5f;
     public float time;
     public AudioSource audioSource;
     public AudioClip[] audioClips;
+    public ESkill[] eSkills;
 
     public enum EStatus
     {
@@ -51,6 +53,7 @@ public class Skill : MonoBehaviour
             {ESkill.CLIMB, hillclimber},
             {ESkill.COVID19, virus}
         };
+        currentSkills = new Dictionary<ESkill, float>();
     }
     void Start()
     {
@@ -60,6 +63,7 @@ public class Skill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (run_skill)
         {
             time -= Time.deltaTime;
@@ -73,17 +77,33 @@ public class Skill : MonoBehaviour
                 currentSkill = ESkill.NONE;
                 run_skill = false;
             }
+        }//*/
+
+        //check for each active skill if its done
+
+        eSkills = new ESkill[currentSkills.Keys.Count];
+        currentSkills.Keys.CopyTo(eSkills, 0);
+        foreach (ESkill sk in eSkills)
+        {
+            ////
+            //Debug.Log(currentSkill);
+            ////
+
+            ability[sk].DynamicInvoke(EStatus.UPDATE);
+            currentSkills[sk] -= Time.deltaTime;
+            if (currentSkills[sk] <= 0)
+            {
+                currentSkills.Remove(sk);
+                ability[sk].DynamicInvoke(EStatus.END);
+            }
         }
     }
 
     public void runAbility()
     {
+        currentSkills.Add(currentSkill, time_testcool_down);
         ability[currentSkill].DynamicInvoke(EStatus.BEGIN);
-    }
-
-    public bool isAvailable()
-    {
-        return true;
+        currentSkill = ESkill.NONE;
     }
 
     private bool freeze(EStatus status)
