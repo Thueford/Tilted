@@ -207,7 +207,8 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         if (status == EStatus.BEGIN)
         {
-            //Vector3 mouse_position = MouseInputHandler.mouse_position;
+            //follow mouse false
+
             
             foreach (GameObject human in Spawner.getHumans())
             {
