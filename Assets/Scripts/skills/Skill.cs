@@ -15,6 +15,7 @@ public class Skill : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip[] audioClips;
     public ESkill[] eSkills;
+    private GameObject icePicture;
 
     public enum EStatus
     {
@@ -55,6 +56,10 @@ public class Skill : MonoBehaviour
             {ESkill.EMERGENCY, emergency}
         };
         currentSkills = new Dictionary<ESkill, float>();
+
+        //find the ice picture
+        icePicture = GameObject.FindGameObjectWithTag("Ice");
+        icePicture.SetActive(false);
     }
     void Start()
     {
@@ -120,6 +125,9 @@ public class Skill : MonoBehaviour
             //value is in playattr in futur
             Time.timeScale = 0.3f;
             skill.time = skill.time_testcool_down;
+
+            //show ice picture
+            icePicture.SetActive(true);
         }
         else if(status == EStatus.END)
         {
@@ -129,6 +137,9 @@ public class Skill : MonoBehaviour
             //reset timescale
             Time.timeScale = 1f;
             //run after over
+
+            //hideFlags ice picture
+            icePicture.SetActive(false);
         }
 
         return false;
