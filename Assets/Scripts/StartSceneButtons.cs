@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StartSceneButtons : MonoBehaviour
 {
@@ -61,5 +62,21 @@ public class StartSceneButtons : MonoBehaviour
     }
     private void playClickSound() {
         audioSource.PlayOneShot(audioClips[new System.Random().Next(0, audioClips.Length)], 1f);
+    }
+
+    public void mouse_enter_button(Image btn)
+    {
+        float height = btn.GetComponent<RectTransform>().rect.height + 5;
+        float width = btn.GetComponent<RectTransform>().rect.width + 5;
+        btn.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
+        btn.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
+    }
+
+    public void mouse_exit_button(Image btn)
+    {
+        float height = btn.GetComponent<RectTransform>().rect.height - 5;
+        float width = btn.GetComponent<RectTransform>().rect.width - 5;
+        btn.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
+        btn.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
     }
 }
