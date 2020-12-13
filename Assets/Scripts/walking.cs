@@ -78,7 +78,7 @@ public class walking : MonoBehaviour
             }
         }
         /*winkel = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<Rigidbody2D>().rotation;
-		
+
         Debug.Log("Winkel: " + winkel);*/
         //if (!Bergsteiger && !climb && (rand.NextDouble() * 100) < Math.Abs(epEarth.cAngle) && last_collision < 0)
         //    right = epEarth.cAngle < 0;
