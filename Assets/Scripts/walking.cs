@@ -107,7 +107,7 @@ public class walking : MonoBehaviour
             }
         }
 
-        last_collision -= 0.5f;
+        last_collision -= 0.3f;
     }
     public void moveY(float y)
     {
