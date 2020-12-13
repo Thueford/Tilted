@@ -192,7 +192,17 @@ public class Skill : MonoBehaviour
         if(status == EStatus.BEGIN)
         {
             audioSource.PlayOneShot(audioClips[2], 0.7f);
+
+            if (MouseInputHandler.Instance.follow_mouse)
+            {
+                Destroy(MouseInputHandler.Instance.follow_mouse);
+                //instance wall here
+            }
+        } else if (status == EStatus.END)
+        {
+            Destroy(MouseInputHandler.Instance.follow_mouse);
         }
+
         return false;
     }
     private bool magnet(EStatus status)
