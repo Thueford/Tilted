@@ -3674,6 +3674,13 @@ MonoBehaviour:
   audioSource: {fileID: 1112884423}
   audioClips:
   - {fileID: 8300000, guid: d23ce41e4a7531d418116de57963ff9e, type: 3}
+  - {fileID: 8300000, guid: 67cade6d0460e95499000a722947ddae, type: 3}
+  - {fileID: 8300000, guid: ffb1d6e415044d149a55764bdea5bfd9, type: 3}
+  - {fileID: 8300000, guid: 17b05eb49f92f8e4895e97b000a56b8e, type: 3}
+  - {fileID: 8300000, guid: 5f054c1d0b0350e43afbe536bcf29a64, type: 3}
+  - {fileID: 8300000, guid: c36fdcfe47d08bf4e8423d8387d4485c, type: 3}
+  - {fileID: 8300000, guid: d1127bfc30ec59040aa1511c41021518, type: 3}
+  - {fileID: 8300000, guid: 825b30ac8dd0bc241bf76a5015a94c7b, type: 3}
   eSkills: 
   shock_radius: 50
   magnet_radius: 50
