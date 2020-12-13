@@ -330,7 +330,5 @@ public class Skill : MonoBehaviour
             covidPicture.SetActive(false);
         }
         return false;
-
-        return false;
     }
 }
