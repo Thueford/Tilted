@@ -14,6 +14,7 @@ public class cool_down : MonoBehaviour
     public bool available = true;
     public bool keystat;
     public Text txtTime;
+    public bool executeOnes = false;
 
     private void Awake()
     {
@@ -45,15 +46,22 @@ public class cool_down : MonoBehaviour
         {
             time -= Time.deltaTime;
             GetComponent<Image>().fillAmount = time / cooldown_time;
-            txtTime.text = time.ToString("0.0");
+            if (!executeOnes)
+            {
+                txtTime.text = time.ToString("0.0");
+            }
         }
         else
         {
             KeyCode key = playerattribute.keySkill.FirstOrDefault(o => o.Value == icon_name).Key;
             txtTime.text = key == 0 ? "0.0" : char.ConvertFromUtf32((int)key).ToUpper();
-            time = cooldown_time;
-            available = true;
-            keystat = false;
+            if (!executeOnes)
+            {
+                time = cooldown_time;
+                available = true;
+                keystat = false;
+            }
+            
         }
     }
 }
