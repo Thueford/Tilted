@@ -3616,6 +3616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8f80048e6ffef47a11336a108c0fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  follow_mouse: []
   audioSource: {fileID: 1899816070}
   pickSounds:
   - {fileID: 8300000, guid: b1f258bd2f2e57a4991020185e08a4f6, type: 3}
@@ -3654,6 +3655,8 @@ MonoBehaviour:
   time: 0
   anzMenschen: 0
   dragDropAnz: 0
+  bombPrefab: {fileID: 5863989603057336588, guid: 41a4a691907763b4c9ed4be500e080f0,
+    type: 3}
 --- !u!114 &1899816069
 MonoBehaviour:
   m_ObjectHideFlags: 0
