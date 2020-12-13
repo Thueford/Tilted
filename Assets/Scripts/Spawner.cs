@@ -27,9 +27,9 @@ public class Spawner : MonoBehaviour
             throw new AssertionException("prefabs.Length != prefabProb.Length", "Turtle.Spawner prefabs must have same length as prefabProb");
         //Debug.Assert(prefabs.Length == prefabProb.Length, "Turtle.Spawner prefabs must have same length as prefabProb.");
 
-        GameObject[] tmp = GameObject.FindGameObjectsWithTag("Earth");
-        if (tmp.Length == 0) throw new NullReferenceException("Earth not found.");
-        bndEarth = tmp[0].GetComponent<Renderer>().bounds;
+        GameObject earth = GameObject.FindGameObjectWithTag("Earth");
+        if (earth == null) throw new NullReferenceException("Earth not found.");
+        bndEarth = earth.GetComponent<Renderer>().bounds;
 
         StartCoroutine(waveInterval());
         //spawnWave();

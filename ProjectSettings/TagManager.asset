@@ -6,6 +6,8 @@ TagManager:
   tags:
   - human
   - Earth
+  - tiltmeter
+  - tiltregler
   layers:
   - Default
   - TransparentFX
