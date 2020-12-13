@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class walking : MonoBehaviour
 {
@@ -12,16 +13,18 @@ public class walking : MonoBehaviour
     public Rigidbody2D rb;
     public Vector2 addVelocity = new Vector2(0, 0);
 
-    public float tx { get; private set; }
     public float y { get; private set; }
 
-    public bool on_earth = false;
+    public bool on_earth;
     public float speed;
+    public bool emergency;
+    public bool corona;
     public bool right { get; private set; }
     public bool Bergsteiger;
     public bool climb = false;
     public float last_collision = 0;
 
+    private float emergency_target;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +50,12 @@ public class walking : MonoBehaviour
         float ytilt = bndEarth.extents.x * Mathf.Sin(epEarth.cAngle);
 
         // default movement
-        if (on_earth) rb.velocity = new Vector2(right ? speed : -speed, rb.velocity.y);
+        if (on_earth)
+        {
+            bool tr = right;
+            if (emergency) tr = rb.transform.position.x < emergency_target;
+            rb.velocity = new Vector2(tr ? speed : -speed, rb.velocity.y);
+        }
 
         if (last_collision <= 0)
         {
@@ -127,7 +135,8 @@ public class walking : MonoBehaviour
     }
     public void moveX(float x)
     {
-        this.tx = x;
+        emergency = true;
+        emergency_target = x;
     }
 
     public void OnTriggerEnter2D()
