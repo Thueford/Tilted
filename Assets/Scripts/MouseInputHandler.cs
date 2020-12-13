@@ -40,18 +40,17 @@ public class MouseInputHandler : MonoBehaviour
             mouse_position = Camera.main.ScreenToWorldPoint(mouse_position);
             mouse_position.z = 0;
 
-
             if (Skill.skill.currentSkill != Skill.ESkill.NONE)
             {
                 //sets start var true
-                if (Skill.skill.isAvailable())
+                if (cool_down.cool_Downs[Skill.skill.currentSkill].isAvailable())
                 {
+                    cool_down.cool_Downs[Skill.skill.currentSkill].keystat = true;
                     Skill.skill.runAbility();
                     Skill.skill.run_skill = true;
                 }
             }
             
-
             for (int i = 0; i<num_max_humans; i++)
             {
                 if (humans.Length >= i)
@@ -60,7 +59,7 @@ public class MouseInputHandler : MonoBehaviour
                     {
                         audioSource.PlayOneShot(pickSounds[new System.Random().Next(0, pickSounds.Length)], 0.8f);
                         picked.Add(humans[i]);
-                        Debug.Log("pick");
+                        //Debug.Log("pick");
                     }
                 }
             }
@@ -69,7 +68,7 @@ public class MouseInputHandler : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             audioSource.PlayOneShot(dropSounds[new System.Random().Next(0, dropSounds.Length)], 0.8f);
-            Debug.Log("clear");
+            //Debug.Log("clear");
             picked.Clear();
         }
 

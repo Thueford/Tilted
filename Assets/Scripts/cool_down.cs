@@ -5,12 +5,20 @@ using UnityEngine.UI;
 
 public class cool_down : MonoBehaviour
 {
+    //public static List<cool_down> cool_Downs = new List<cool_down>();
+    public static Dictionary<Skill.ESkill, cool_down> cool_Downs = new Dictionary<Skill.ESkill, cool_down>();
+    public Skill.ESkill icon_name;
     public float cooldown_time;
     public float time;
     public bool available = true;
     public bool keystat;
-    public KeyCode key;
     public Text txtTime;
+
+    private void Awake()
+    {
+        //cool_Downs.Add(this);
+        cool_Downs.Add(icon_name, this);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -26,11 +34,11 @@ public class cool_down : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(key))
+        /*if (Input.GetKey(key))
         {
             keystat = true;
             available = false;
-        }
+        }//*/
 
         if(time > 0 && keystat)
         {
