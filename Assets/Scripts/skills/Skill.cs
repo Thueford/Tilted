@@ -116,8 +116,13 @@ public class Skill : MonoBehaviour
 
     public void runAbility()
     {
-        //currentSkills.Add(currentSkill, time_testcool_down);
-        currentSkills.Add(currentSkill, playerattribute.skill_duration[currentSkill]);
+        if (playerattribute.skill_duration.ContainsKey(currentSkill)) {
+            currentSkills.Add(currentSkill, playerattribute.skill_duration[currentSkill]);
+        } else
+        {
+            currentSkills.Add(currentSkill, time_testcool_down);
+        }
+        //currentSkills.Add(currentSkill, playerattribute.skill_duration[currentSkill]);
         ability[currentSkill].DynamicInvoke(EStatus.BEGIN);
         currentSkill = ESkill.NONE;
     }
