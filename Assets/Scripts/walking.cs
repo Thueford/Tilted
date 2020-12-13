@@ -78,21 +78,22 @@ public class walking : MonoBehaviour
             }
         }
         /*winkel = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<Rigidbody2D>().rotation;
-		
+
         Debug.Log("Winkel: " + winkel);*/
         if (!Bergsteiger && !climb && (rand.NextDouble() * 100) < Math.Abs(epEarth.cAngle) && last_collision < 0)
             right = epEarth.cAngle < 0;
 
         if (climb) right = epEarth.cAngle > 0;
 
-        /*float winkel = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<earth_physics>().cAngle;
-        if (!Bergsteiger && !climb && (rand.NextDouble() * 100) < Math.Abs(winkel))
+
+        if (!Bergsteiger && !climb && (rand.NextDouble() * 100) < Math.Abs(epEarth.cAngle))
         {
-            if (last_collision < 0) right = winkel < 0;
-            else if (winkel > 0) right = !right;
+            if (last_collision < 0) right = epEarth.cAngle < 0;
+            else if (epEarth.cAngle > 0) right = !right;
         }
 
-        if (climb) right = winkel > 0;*/
+
+        if (climb) right = epEarth.cAngle > 0;
         last_collision -= 0.3f;
     }
     public void moveY(float y)

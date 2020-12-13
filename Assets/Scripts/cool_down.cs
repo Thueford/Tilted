@@ -45,13 +45,15 @@ public class cool_down : MonoBehaviour
         {
             time -= Time.deltaTime;
             GetComponent<Image>().fillAmount = time / cooldown_time;
-            txtTime.text = time.ToString("F");
-        } else
+            txtTime.text = time.ToString("0.0");
+        }
+        else
         {
-            txtTime.text = char.ConvertFromUtf32((int)playerattribute.keySkill.First(o => o.Value == icon_name).Key);
-            keystat = false;
+            KeyCode key = playerattribute.keySkill.FirstOrDefault(o => o.Value == icon_name).Key;
+            txtTime.text = key == 0 ? "0.0" : char.ConvertFromUtf32((int)key).ToUpper();
             time = cooldown_time;
             available = true;
+            keystat = false;
         }
     }
 }
