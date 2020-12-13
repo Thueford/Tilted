@@ -47,7 +47,7 @@ public class MouseInputHandler : MonoBehaviour
                 {
                     cool_down.cool_Downs[Skill.skill.currentSkill].keystat = true;
                     Skill.skill.runAbility();
-                    Skill.skill.run_skill = true;
+                    //Skill.skill.run_skill = true;
                 }
             }
 

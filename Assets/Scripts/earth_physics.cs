@@ -65,7 +65,7 @@ public class earth_physics : MonoBehaviour
         // current tilt based stuff
         diff = Math.Abs(1000 * diff * Time.deltaTime);
         if (diff > 40) playTiltSound();
-        if (cAngle >= max_neigung) SceneManager.LoadScene("GameOverScene");
+        if (Math.Abs(cAngle) >= max_neigung) SceneManager.LoadScene("GameOverScene");
     }
 
     private void playTiltSound(int n = 0) {
