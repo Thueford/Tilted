@@ -31,14 +31,14 @@ public class MouseInputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        mouse_position = Input.mousePosition;
+        mouse_position = Camera.main.ScreenToWorldPoint(mouse_position);
+        mouse_position.z = 0;
+
         //checks for mouse events
-        if (UnityEngine.Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             GameObject[] humans = playerattribute.getNearestMouseHumans();
-
-            mouse_position = Input.mousePosition;
-            mouse_position = Camera.main.ScreenToWorldPoint(mouse_position);
-            mouse_position.z = 0;
 
             if (Skill.skill.currentSkill != Skill.ESkill.NONE)
             {
@@ -50,7 +50,7 @@ public class MouseInputHandler : MonoBehaviour
                     Skill.skill.run_skill = true;
                 }
             }
-            
+
             for (int i = 0; i<num_max_humans; i++)
             {
                 if (humans.Length >= i)
@@ -74,19 +74,8 @@ public class MouseInputHandler : MonoBehaviour
 
         //if picked not empty make follow mouse
         if (picked.Count > 0)
-        {
             foreach (GameObject g in picked)
-            {
-                mouse_position = Input.mousePosition;
-                mouse_position = Camera.main.ScreenToWorldPoint(mouse_position);
-                Vector3 npos = new Vector3();
-
-                npos.x = mouse_position.x; //-2 istoffset
-                npos.y = mouse_position.y;
-                npos.z = 0;
-                g.transform.position = npos;
-            }
-        }
+                g.transform.position = mouse_position;
     }
 
     float distanceOf(Vector3 go, Vector3 mouse)
