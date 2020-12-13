@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -47,7 +48,7 @@ public class cool_down : MonoBehaviour
             txtTime.text = time.ToString("F");
         } else
         {
-            txtTime.text = "0.00";
+            txtTime.text = char.ConvertFromUtf32((int)playerattribute.keySkill.First(o => o.Value == icon_name).Key);
             keystat = false;
             time = cooldown_time;
             available = true;
