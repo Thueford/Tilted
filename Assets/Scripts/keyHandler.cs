@@ -10,10 +10,7 @@ public class keyHandler : MonoBehaviour
 
     public void Awake()
     {
-        if (handler != null)
-        {
-            return;
-        }
+        if (handler != null) return;
         handler = this;
     }
 
@@ -30,11 +27,11 @@ public class keyHandler : MonoBehaviour
         {
             Debug.Log("Event!!");
         }//*/
-        foreach (KeyCode key in playerattribute.player.keySkill.Keys)
+        foreach (KeyCode key in playerattribute.keySkill.Keys)
         {
             if (Input.GetKeyDown(key))
             {
-                playerattribute.player.useSkill(playerattribute.player.keySkill[key]);
+                playerattribute.player.useSkill(playerattribute.keySkill[key]);
             }
         }
 

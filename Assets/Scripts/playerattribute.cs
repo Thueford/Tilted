@@ -11,14 +11,11 @@ public class playerattribute : MonoBehaviour
     public ArrayList highscore;
     public int anzMenschen;
     public int dragDropAnz;
-    public Dictionary<KeyCode, Skill.ESkill> keySkill;
+    public static Dictionary<KeyCode, Skill.ESkill> keySkill;
 
     private void Awake()
     {
-        if (player != null)
-        {
-            return;
-        }
+        if (player != null) return;
         player = this;
 
         keySkill = new Dictionary<KeyCode, Skill.ESkill>()
