@@ -13,7 +13,8 @@ public class playerattribute : MonoBehaviour
     public int dragDropAnz;
     public static Dictionary<KeyCode, Skill.ESkill> keySkill;
     public static Dictionary<Skill.ESkill, GameObject> has_follow_mouse;
-    public GameObject bombPrefab; 
+    public GameObject bombPrefab;
+    public GameObject magnetPrefab;
 
     private void Awake()
     {
@@ -35,6 +36,7 @@ public class playerattribute : MonoBehaviour
         has_follow_mouse = new Dictionary<Skill.ESkill, GameObject>()
         {
             {Skill.ESkill.BOMB, bombPrefab},
+            {Skill.ESkill.MAGNET, magnetPrefab},
         };
     }
 
