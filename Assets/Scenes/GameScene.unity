@@ -3655,8 +3655,10 @@ MonoBehaviour:
   time: 0
   anzMenschen: 0
   dragDropAnz: 0
-  bombPrefab: {fileID: 0}
-  magnetPrefab: {fileID: 0}
+  bombPrefab: {fileID: 5863989603057336588, guid: 41a4a691907763b4c9ed4be500e080f0,
+    type: 3}
+  magnetPrefab: {fileID: 8981518453229584320, guid: 1f73d7e725741c648a355812d14056c2,
+    type: 3}
 --- !u!114 &1899816069
 MonoBehaviour:
   m_ObjectHideFlags: 0
