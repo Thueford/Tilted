@@ -290,19 +290,24 @@ public class Skill : MonoBehaviour
     private bool emergency(EStatus status)
     {
         ///////////////////////////////
-        audioSource.PlayOneShot(audioClips[7], 0.3f);
         ///////////////////////////////
 
-        /*
-         *
-         *
-         * foreach(GameObject g in Spawner.getHuman()){
-g.GetComponent<walking>().moveX(XCoordOfEarthCenter);
-}
-         *
-         *
-         *
-         */
+        if (status == EStatus.BEGIN)
+        {
+            audioSource.PlayOneShot(audioClips[7], 0.3f);
+
+            foreach (GameObject g in Spawner.getHumans())
+            {
+                g.GetComponent<walking>().moveX(GameObject.FindGameObjectWithTag("Earth").GetComponent<Renderer>().bounds.center.x);
+            }
+        }
+        else if (status == EStatus.END)
+        {
+
+            //hide bombpic
+            covidPicture.SetActive(false);
+        }
+        return false;
 
         return false;
     }
