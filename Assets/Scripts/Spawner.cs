@@ -32,7 +32,7 @@ public class Spawner : MonoBehaviour
         bndEarth = earth.GetComponent<Renderer>().bounds;
 
         StartCoroutine(waveInterval());
-        //spawnWave();
+        // spawnWave();
     }
 
     public static GameObject[] getHumans()
