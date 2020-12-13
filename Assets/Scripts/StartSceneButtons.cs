@@ -48,12 +48,17 @@ public class StartSceneButtons : MonoBehaviour
         Application.Quit();
     }
 
+    
     public void credits_btn_pressed()
     {
         playClickSound();
         SceneManager.LoadScene("CreditsScene");
     }
-
+    public void exit_credit_btn_pressed()
+    {
+        //playClickSound();
+        SceneManager.LoadScene("StartScene");
+    }
     private void playClickSound() {
         audioSource.PlayOneShot(audioClips[new System.Random().Next(0, audioClips.Length)], 1f);
     }
