@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -136,9 +135,15 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         if(status == EStatus.BEGIN)
         {
-            Debug.Log("SHOCKWAVE");
-            Vector2 shockwavepos = MouseInputHandler.mouse_position;
-            Collider[] human = Physics.OverlapSphere(shockwavepos, shock_radius);
+            time = time_testcool_down;
+        }
+        else if(status == EStatus.UPDATE)
+        {
+            foreach (GameObject o in playerattribute.getHumansInMouseRange(shock_radius))
+            {
+                float d = MouseInputHandler.getMouseDistance(o);
+                o.GetComponent<walking>().addVelocity = shock_strength * Time.deltaTime * (d / shock_radius - 1) * (MouseInputHandler.mouse_position - o.transform.position) * new Vector2(1, 0.4f);
+            }
         }
         return false;
     }
