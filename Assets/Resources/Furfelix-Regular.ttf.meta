@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 7b59d00dcb334c84ea1dc6922c61123d
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Furfelix
+  fontNames:
+  - Furfelix
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: f4bfe70ca63dbb7408fdcb998643a94d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
