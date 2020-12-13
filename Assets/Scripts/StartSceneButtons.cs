@@ -34,6 +34,9 @@ public class StartSceneButtons : MonoBehaviour
     {
         playClickSound();
         //open settings
+        PlayerPrefs.SetInt("previousLevel", Application.loadedLevel);
+        SceneManager.LoadScene("ShowControlsScene");
+
     }
     /// <summary>
     /// skilltreebutton pressed

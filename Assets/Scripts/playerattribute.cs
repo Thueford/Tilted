@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class playerattribute : MonoBehaviour
     public ArrayList highscore;
     public int anzMenschen;
     public int dragDropAnz;
-    public Dictionary<KeyCode, string> keySkill;
+    public Dictionary<KeyCode, Skill.ESkill> keySkill;
 
     private void Awake()
     {
@@ -20,15 +21,15 @@ public class playerattribute : MonoBehaviour
         }
         player = this;
 
-        keySkill = new Dictionary<KeyCode, string>()
+        keySkill = new Dictionary<KeyCode, Skill.ESkill>()
         {
-            {KeyCode.Q, "Freeze"},
-            {KeyCode.W, "Shockwave"},
-            {KeyCode.E, "Wall"},
-            {KeyCode.R, "Magnet"},
-            {KeyCode.T, "Bomb"},
-            {KeyCode.Z, "Hillclimber"},
-            {KeyCode.U, "Virus COV-19"}
+            {KeyCode.Q, Skill.ESkill.FREEZE},
+            {KeyCode.W, Skill.ESkill.SHOCK},
+            {KeyCode.E, Skill.ESkill.WALL},
+            {KeyCode.R, Skill.ESkill.MAGNET},
+            {KeyCode.T, Skill.ESkill.BOMB},
+            {KeyCode.Z, Skill.ESkill.CLIMB},
+            {KeyCode.U, Skill.ESkill.COVID19}
         };
     }
 
@@ -38,18 +39,29 @@ public class playerattribute : MonoBehaviour
         
     }
 
-    public void useSkill(string key)
+    public static GameObject[] getNearestMouseHumans()
     {
-        //gets called from keyhandler and checks if ability is useable if true then use when mouseclicked?
-        //if not available return
+        GameObject[] l = Spawner.getHumans();
+        System.Array.Sort(l, (a, b) => MouseInputHandler.getMouseDistance(a) < MouseInputHandler.getMouseDistance(b) ? -1 : 1 );
+        return l;
+    }
 
+    public static GameObject[] getHumansInMouseRange(float radius)
+    {
+        GameObject[] l = Array.FindAll(Spawner.getHumans(), o => MouseInputHandler.getMouseDistance(o) < radius);
+        Array.Sort(l, (a, b) => MouseInputHandler.getMouseDistance(a) < MouseInputHandler.getMouseDistance(b) ? -1 : 1);
+        return l;
+    }
 
-        Debug.Log("setskill");
-        //MouseInputHandler.Instance.skill = ability[key];
-        //check if is useable
-        //if (cool_down.isAvailable)#
-        //gets skill key from the keydict
-        //string skill = playerattribute.player.keySkill[key];
+    public void useSkill(Skill.ESkill key)
+    {
+         //falls erwünscht wieder nutzen
+        /*if (!cool_down.cool_Downs[key].isAvailable())
+        {
+            return;
+        }//*/
+
+        //Wählt skill aus jedoch führt den nicht aus
         if (Skill.skill.ability.ContainsKey(key))
         {
             //hier vorher auf icon cooldown checken

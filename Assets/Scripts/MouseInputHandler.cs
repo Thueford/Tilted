@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class MouseInputHandler : MonoBehaviour
 {
     public static MouseInputHandler Instance;
 
-    private Vector3 mouse_position;
+    public static Vector3 mouse_position;
     private List<GameObject> picked = new List<GameObject>();
 
     public AudioSource audioSource;
@@ -30,26 +31,25 @@ public class MouseInputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        mouse_position = Input.mousePosition;
+        mouse_position = Camera.main.ScreenToWorldPoint(mouse_position);
+        mouse_position.z = 0;
+
         //checks for mouse events
-        if (UnityEngine.Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            GameObject[] humans = Spawner.getHumans();
+            GameObject[] humans = playerattribute.getNearestMouseHumans();
 
-            mouse_position = Input.mousePosition;
-            mouse_position = Camera.main.ScreenToWorldPoint(mouse_position);
-            mouse_position.z = 0;
-
-
-            if (Skill.skill.currentSkill != "")
+            if (Skill.skill.currentSkill != Skill.ESkill.NONE)
             {
                 //sets start var true
-                if (Skill.skill.isAvailable())
+                if (cool_down.cool_Downs[Skill.skill.currentSkill].isAvailable())
                 {
+                    cool_down.cool_Downs[Skill.skill.currentSkill].keystat = true;
                     Skill.skill.runAbility();
                     Skill.skill.run_skill = true;
                 }
             }
-            System.Array.Sort(humans, (a, b) => { return Vector3.Distance(a.transform.position, mouse_position) < Vector3.Distance(b.transform.position, mouse_position) ? -1 : 1; });
 
             for (int i = 0; i<num_max_humans; i++)
             {
@@ -59,13 +59,13 @@ public class MouseInputHandler : MonoBehaviour
                     {
                         audioSource.PlayOneShot(pickSounds[new System.Random().Next(0, pickSounds.Length)], 0.8f);
                         picked.Add(humans[i]);
-                        Debug.Log("pick");
+                        //Debug.Log("pick");
                     }
                 }
             }
         }
 
-        if (UnityEngine.Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             if (picked.Count > 0) {
                 audioSource.PlayOneShot(dropSounds[new System.Random().Next(0, dropSounds.Length)], 0.8f);
@@ -76,23 +76,17 @@ public class MouseInputHandler : MonoBehaviour
 
         //if picked not empty make follow mouse
         if (picked.Count > 0)
-        {
             foreach (GameObject g in picked)
-            {
-                mouse_position = Input.mousePosition;
-                mouse_position = Camera.main.ScreenToWorldPoint(mouse_position);
-                Vector3 npos = new Vector3();
-
-                npos.x = mouse_position.x; //-2 istoffset
-                npos.y = mouse_position.y;
-                npos.z = 0;
-                g.transform.position = npos;
-            }
-        }
+                g.transform.position = mouse_position;
     }
 
     float distanceOf(Vector3 go, Vector3 mouse)
     {
         return Mathf.Abs(mouse.x - go.x + mouse.y - go.y);
+    }
+
+    public static float getMouseDistance(GameObject o)
+    {
+        return Vector3.Distance(o.transform.position, MouseInputHandler.mouse_position);
     }
 }
