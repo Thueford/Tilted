@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class earth_physics : MonoBehaviour
 {
@@ -11,17 +12,15 @@ public class earth_physics : MonoBehaviour
     public float tAngle; // target angle
     public float diff;   // current tilt difference per second
 
-    public AudioSource audioSource;
-    public AudioSource walkSource;
-    public AudioClip[] audioClips;
-    public AudioClip[] walkSounds;
+    public AudioSource audioSource, walkSource;
+    public AudioClip[] audioClips, walkSounds;
 
     private const float max_neigung = 20f;
 
     public Rigidbody2D rb;
-
     private Bounds bounds;
-
+    private RectTransform bTiltmeter, bTiltregler;
+    public Vector3 temp;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +30,9 @@ public class earth_physics : MonoBehaviour
         Debug.Log("start");
         bounds = GetComponent<Renderer>().bounds;
         Debug.Log(transform.position.x);
+
+        bTiltmeter = GameObject.FindGameObjectWithTag("tiltmeter").GetComponent<RectTransform>();
+        bTiltregler = GameObject.FindGameObjectWithTag("tiltregler").GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -65,6 +67,8 @@ public class earth_physics : MonoBehaviour
         // current tilt based stuff
         diff = Math.Abs(1000 * diff * Time.deltaTime);
         if (diff > 40) playTiltSound();
+        temp = bTiltmeter.rect.size * cAngle / (2 * max_neigung);
+        bTiltregler.position = bTiltmeter.position + bTiltmeter.right / 2 - new Vector3(temp.x, 0);
         if (Math.Abs(cAngle) >= max_neigung) SceneManager.LoadScene("GameOverScene");
     }
 
@@ -79,5 +83,4 @@ public class earth_physics : MonoBehaviour
             walkSource.PlayOneShot(walkSounds[1], 0.5f);
         }
     }
-
 }
