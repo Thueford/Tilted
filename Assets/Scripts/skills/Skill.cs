@@ -23,7 +23,7 @@ public class Skill : MonoBehaviour
 
     public enum ESkill
     {
-        NONE, FREEZE, SHOCK, WALL, MAGNET, BOMB, CLIMB, COVID19
+        NONE, FREEZE, SHOCK, WALL, MAGNET, BOMB, CLIMB, COVID19, EMERGENCY
     }
 
     public float shock_radius;
@@ -51,7 +51,8 @@ public class Skill : MonoBehaviour
             {ESkill.MAGNET, magnet},
             {ESkill.BOMB, bomb},
             {ESkill.CLIMB, hillclimber},
-            {ESkill.COVID19, virus}
+            {ESkill.COVID19, virus},
+            {ESkill.EMERGENCY, emergency}
         };
         currentSkills = new Dictionary<ESkill, float>();
     }
@@ -212,6 +213,14 @@ public class Skill : MonoBehaviour
         return false;
     }
     private bool virus(EStatus status)
+    {
+        ///////////////////////////////
+        ///     ADD SOUND HERE      ///
+        ///////////////////////////////
+        return false;
+    }
+
+    private bool emergency(EStatus status)
     {
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
