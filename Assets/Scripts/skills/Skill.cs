@@ -158,6 +158,7 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         if(status == EStatus.BEGIN)
         {
+            audioSource.PlayOneShot(audioClips[1], 0.5f);
             time = time_testcool_down;
         }
         else if(status == EStatus.UPDATE)
@@ -172,9 +173,10 @@ public class Skill : MonoBehaviour
     }
     private bool wall(EStatus status)
     {
-        ///////////////////////////////
-        ///     ADD SOUND HERE      ///
-        ///////////////////////////////
+        if(status == EStatus.BEGIN)
+        {
+            audioSource.PlayOneShot(audioClips[2], 0.7f);
+        }
         return false;
     }
     private bool magnet(EStatus status)
@@ -184,6 +186,7 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         if (status == EStatus.BEGIN)
         {
+            audioSource.PlayOneShot(audioClips[3], 0.3f);
             time = time_testcool_down;
         }
         else if (status == EStatus.UPDATE)
@@ -205,14 +208,14 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         if (status == EStatus.BEGIN)
         {
-            
+            audioSource.PlayOneShot(audioClips[4], 0.5f);
 
             //show bomb picture
             bombPicture.SetActive(true);
         }
         else if (status == EStatus.END)
         {
-            
+
             //hide bombpic
             bombPicture.SetActive(false);
         }
@@ -226,7 +229,7 @@ public class Skill : MonoBehaviour
         if (status == EStatus.BEGIN)
         {
             //Sound wird gespielt
-            audioSource.PlayOneShot(audioClips[0], 1f);
+            audioSource.PlayOneShot(audioClips[5], 1f);
             time = time_testcool_down;
             foreach(GameObject o in playerattribute.getHumansInMouseRange(climb_radius))
             {
@@ -252,7 +255,7 @@ public class Skill : MonoBehaviour
         if (status == EStatus.BEGIN)
         {
 
-
+            audioSource.PlayOneShot(audioClips[6], 0.5f);
             //show bomb picture
             covidPicture.SetActive(true);
         }
@@ -268,7 +271,7 @@ public class Skill : MonoBehaviour
     private bool emergency(EStatus status)
     {
         ///////////////////////////////
-        ///     ADD SOUND HERE      ///
+        audioSource.PlayOneShot(audioClips[7], 0.3f);
         ///////////////////////////////
         return false;
     }
