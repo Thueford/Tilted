@@ -11,7 +11,7 @@ public class exitControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playClickSound();
+        // playClickSound();
     }
 
     // Update is called once per frame
