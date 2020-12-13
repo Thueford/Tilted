@@ -26,6 +26,7 @@ public class Skill : MonoBehaviour
 
     public float shock_radius;
     public float magnet_radius;
+    public float climb_radius;
 
     public float shock_strength;
     public float magnet_strength;
@@ -53,7 +54,7 @@ public class Skill : MonoBehaviour
     }
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -63,7 +64,7 @@ public class Skill : MonoBehaviour
         {
             time -= Time.deltaTime;
 
-            // Debug.Log(currentSkill);
+            Debug.Log(currentSkill);
             ability[currentSkill].DynamicInvoke(EStatus.UPDATE);
 
             if (time <= 0)
@@ -161,6 +162,21 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
+        if (status == EStatus.BEGIN)
+        {
+            //Sound wird gespielt
+            audioSource.PlayOneShot(audioClips[0], 1f);
+            time = time_testcool_down;
+            foreach(GameObject o in playerattribute.getNearestMouseHumans())
+            {
+
+            } 
+        } 
+        else if (status == EStatus.END)
+        {
+            
+        }
+
         return false;
     }
     private bool virus(EStatus status)

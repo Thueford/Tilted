@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class exitControls : MonoBehaviour
+public class openControls : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -20,6 +20,7 @@ public class exitControls : MonoBehaviour
 
     public void btn_pressed()
     {
-        Application.LoadLevel(PlayerPrefs.GetInt("previousLevel"));
+        PlayerPrefs.SetInt("previousLevel", Application.loadedLevel);
+        SceneManager.LoadScene("ShowControlsScene");
     }
 }

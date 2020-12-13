@@ -16,7 +16,7 @@ public class earth_physics : MonoBehaviour
     public AudioClip[] audioClips;
     public AudioClip[] walkSounds;
 
-    private const float max_neigung = 24f;
+    private const float max_neigung = 20f;
 
     public Rigidbody2D rb;
 
