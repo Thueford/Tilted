@@ -174,7 +174,7 @@ public class Skill : MonoBehaviour
         } 
         else if (status == EStatus.END)
         {
-            foreach(GameObject o in Spawner.GetHumans())
+            foreach(GameObject o in Spawner.getHumans())
             {
                 o.GetComponent<walking>().climb = false;
             }
