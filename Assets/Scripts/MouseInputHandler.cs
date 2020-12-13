@@ -9,7 +9,8 @@ public class MouseInputHandler : MonoBehaviour
 
     public static Vector3 mouse_position;
     private List<GameObject> picked;
-    public List<GameObject> follow_mouse;
+    //public List<GameObject> follow_mouse;
+    public GameObject follow_mouse;
 
     public AudioSource audioSource;
     public AudioClip[] pickSounds;
@@ -28,7 +29,8 @@ public class MouseInputHandler : MonoBehaviour
 
         Instance = this;
         picked = new List<GameObject>();
-        follow_mouse = new List<GameObject>();
+        //follow_mouse = new List<GameObject>();
+        //GameObject follow_mouse;
     }
 
     // Update is called once per frame
@@ -38,11 +40,17 @@ public class MouseInputHandler : MonoBehaviour
         mouse_position = Camera.main.ScreenToWorldPoint(mouse_position);
         mouse_position.z = 0;
 
-        foreach (GameObject obj in follow_mouse)
+        /*foreach (GameObject obj in follow_mouse)
         {
             //follow mouse
             obj.transform.position = mouse_position;
+        }//*/
+        if (follow_mouse)
+        {
+            follow_mouse.transform.position = mouse_position;
         }
+
+
 
         //checks for mouse events
         if (Input.GetMouseButtonDown(0))
@@ -55,16 +63,24 @@ public class MouseInputHandler : MonoBehaviour
                 if (cool_down.cool_Downs[Skill.skill.currentSkill].isAvailable())
                 {
                     cool_down.cool_Downs[Skill.skill.currentSkill].keystat = true;
+                    cool_down.cool_Downs[Skill.skill.currentSkill].available = false;
                     Skill.skill.runAbility();
                     //Skill.skill.run_skill = true;
 
-                    foreach (GameObject obj in follow_mouse)
-                    {
+                    //foreach (GameObject obj in follow_mouse)
+                    //{
                         //destroyobj again
-                        Destroy(obj);
+                    Destroy(follow_mouse);
+                    //}
+                    //follow_mouse.Clear();
+                } else
+                {
+                    if (follow_mouse)
+                    {
+                        Destroy(follow_mouse);
                     }
-                    follow_mouse.Clear();
                 }
+                
             }
 
             for (int i = 0; i<num_max_humans; i++)
