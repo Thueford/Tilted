@@ -3157,6 +3157,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d23ce41e4a7531d418116de57963ff9e, type: 3}
   shock_radius: 50
   magnet_radius: 50
+  climb_radius: 0
+  shock_strength: 0
+  magnet_strength: 10
 --- !u!82 &1899816070
 AudioSource:
   m_ObjectHideFlags: 0
