@@ -16,6 +16,8 @@ public class Skill : MonoBehaviour
     public AudioClip[] audioClips;
     public ESkill[] eSkills;
     private GameObject icePicture;
+    private GameObject bombPicture;
+    private GameObject covidPicture;
 
     public enum EStatus
     {
@@ -57,9 +59,14 @@ public class Skill : MonoBehaviour
         };
         currentSkills = new Dictionary<ESkill, float>();
 
-        //find the ice picture
+        //Init effect pics
         icePicture = GameObject.FindGameObjectWithTag("Ice");
         icePicture.SetActive(false);
+        bombPicture = GameObject.FindGameObjectWithTag("BombPic");
+        bombPicture.SetActive(false);
+        covidPicture = GameObject.FindGameObjectWithTag("CovidPic");
+        covidPicture.SetActive(false);
+
     }
     void Start()
     {
@@ -196,6 +203,19 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
+        if (status == EStatus.BEGIN)
+        {
+            
+
+            //show bomb picture
+            bombPicture.SetActive(true);
+        }
+        else if (status == EStatus.END)
+        {
+            
+            //hide bombpic
+            bombPicture.SetActive(false);
+        }
         return false;
     }
     private bool hillclimber(EStatus status)
@@ -228,6 +248,20 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
+
+        if (status == EStatus.BEGIN)
+        {
+
+
+            //show bomb picture
+            covidPicture.SetActive(true);
+        }
+        else if (status == EStatus.END)
+        {
+
+            //hide bombpic
+            covidPicture.SetActive(false);
+        }
         return false;
     }
 
