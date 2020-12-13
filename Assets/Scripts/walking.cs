@@ -37,7 +37,7 @@ public class walking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        speed += 1f * Time.deltaTime;
+        speed += 0.01f;//1f * Time.deltaTime;
 
         // default movement
         if (right && on_earth)
@@ -58,10 +58,10 @@ public class walking : MonoBehaviour
             rb.velocity = new Vector2(0f, 0f);
         }
         // for effects
-        rb.velocity += addVelocity;
+        //rb.velocity += addVelocity;
 
         //change walking directions
-        if (rand.NextDouble()*100 == 1 && on_earth && !climb)
+        if (rand.NextDouble()*100 < 5 && on_earth && !climb)
         {
             if (rand.NextDouble() * 100 < 50)
             {
@@ -80,17 +80,16 @@ public class walking : MonoBehaviour
         /*winkel = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<Rigidbody2D>().rotation;
 
         Debug.Log("Winkel: " + winkel);*/
-        //if (!Bergsteiger && !climb && (rand.NextDouble() * 100) < Math.Abs(epEarth.cAngle) && last_collision < 0)
-        //    right = epEarth.cAngle < 0;
 
-        //if (climb) right = epEarth.cAngle > 0;
-        //last_collision -= 0.5f;
+        if (climb) right = epEarth.cAngle > 0;
+
 
         if (!Bergsteiger && !climb && (rand.NextDouble() * 100) < Math.Abs(epEarth.cAngle))
         {
             if (last_collision < 0) right = epEarth.cAngle < 0;
             else if (epEarth.cAngle > 0) right = !right;
         }
+
 
         if (climb) right = epEarth.cAngle > 0;
         last_collision -= 0.3f;
@@ -102,7 +101,7 @@ public class walking : MonoBehaviour
 
     public void OnTriggerEnter2D()
     {
-        if(last_collision<3)right = !right;
+        right = !right;
         float tmpY = rb.transform.position.y;
         y = (float)rand.NextDouble() * (bndEarth.size.y - 0.3f);
         if (y < 1) y += 3;

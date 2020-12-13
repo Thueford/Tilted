@@ -26,7 +26,8 @@ public class playerattribute : MonoBehaviour
             {KeyCode.R, Skill.ESkill.MAGNET},
             {KeyCode.T, Skill.ESkill.BOMB},
             {KeyCode.Z, Skill.ESkill.CLIMB},
-            {KeyCode.U, Skill.ESkill.COVID19}
+            {KeyCode.U, Skill.ESkill.COVID19},
+            {KeyCode.Space, Skill.ESkill.EMERGENCY}
         };
     }
 

@@ -67,8 +67,10 @@ public class MouseInputHandler : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            audioSource.PlayOneShot(dropSounds[new System.Random().Next(0, dropSounds.Length)], 0.8f);
-            //Debug.Log("clear");
+            if (picked.Count > 0) {
+                audioSource.PlayOneShot(dropSounds[new System.Random().Next(0, dropSounds.Length)], 0.8f);
+            }
+            Debug.Log("clear");
             picked.Clear();
         }
 
