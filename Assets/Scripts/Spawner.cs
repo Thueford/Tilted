@@ -32,7 +32,11 @@ public class Spawner : MonoBehaviour
         bndEarth = earth.GetComponent<Renderer>().bounds;
 
         StartCoroutine(waveInterval());
-        // spawnWave();
+        
+        for(int i = 0; i < 10; i++)
+            spawnHuman(
+                bndEarth.min.x + (float)(0.1 + 0.8 * rand.NextDouble()) * bndEarth.size.x,
+                bndEarth.max.y + (float)rand.NextDouble() * bndEarth.size.y * 2);
     }
 
     public static GameObject[] getHumans()
@@ -64,7 +68,6 @@ public class Spawner : MonoBehaviour
         yield return new WaitForSeconds(1);
         while (true)
         {
-
             audioSource.PlayOneShot(audioClips[rand.Next(0, audioClips.Length)], 0.8f);
 
             Debug.Log("Spawn " + waveAmount + " Humans");
