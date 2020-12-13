@@ -11,6 +11,7 @@ public class Skill : MonoBehaviour
     public bool run_skill = false;
     public float time_testcool_down = 5f;
     public float time;
+    public AudioSource music;
     public AudioSource audioSource;
     public AudioClip[] audioClips;
     public ESkill[] eSkills;
@@ -56,7 +57,7 @@ public class Skill : MonoBehaviour
     }
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -112,15 +113,18 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         if (status == EStatus.BEGIN)
         {
-            //Sound wird gespielt
+            //Sound wird gespielt, musik verlangsamt
             audioSource.PlayOneShot(audioClips[0], 1f);
-
+            music.pitch=0.5f;
             //value is in playattr in futur
             Time.timeScale = 0.3f;
             skill.time = skill.time_testcool_down;
         }
         else if(status == EStatus.END)
         {
+            //musik wieder schnell
+            music.pitch=1f;
+
             //reset timescale
             Time.timeScale = 1f;
             //run after over
@@ -195,8 +199,8 @@ public class Skill : MonoBehaviour
             foreach(GameObject o in playerattribute.getHumansInMouseRange(climb_radius))
             {
                 o.GetComponent<walking>().climb = true;
-            } 
-        } 
+            }
+        }
         else if (status == EStatus.END)
         {
             foreach(GameObject o in Spawner.getHumans())
