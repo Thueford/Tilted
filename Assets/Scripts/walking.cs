@@ -84,14 +84,28 @@ public class walking : MonoBehaviour
         /*winkel = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<Rigidbody2D>().rotation;
         Debug.Log("Winkel: " + winkel);*/
         winkel = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<earth_physics>().cAngle;
-        if (!Bergsteiger && !climb && (rand.NextDouble() * 100) < Math.Abs(winkel) && last_collision < 0)
+        if (!Bergsteiger && !climb && (rand.NextDouble() * 100) < Math.Abs(winkel))
         {
-            if (winkel < 0)
+            if (last_collision < 0)
             {
-                right = true;
+                if (winkel < 0)
+                {
+                    right = true;
+                }
+                else
+                {
+                    right = false;
+                }
             } else
             {
-                right = false;
+                if (winkel > 0)
+                {
+                    if(!right) right = true;
+                }
+                else
+                {
+                    if(right) right = false;
+                }
             }
         }
 
@@ -116,7 +130,7 @@ public class walking : MonoBehaviour
 
     public void OnTriggerEnter2D()
     {
-        right = !right;
+        if(last_collision<3)right = !right;
         float tmpY = rb.transform.position.y;
         y = (float)rand.NextDouble() * (bndEarth.size.y - 0.3f);
         if (y < 1)
