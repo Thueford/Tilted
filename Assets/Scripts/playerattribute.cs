@@ -99,6 +99,7 @@ public class playerattribute : MonoBehaviour
             if (has_follow_mouse.ContainsKey(key))
             {
                 GameObject follow_mouse_object = Instantiate(has_follow_mouse[key], MouseInputHandler.mouse_position, Quaternion.identity);
+                follow_mouse_object.transform.localScale = new Vector3(5f, 5f, 0);
                 //MouseInputHandler.Instance.follow_mouse.Add(follow_mouse_object);
                 if (MouseInputHandler.Instance.follow_mouse)
                 {
