@@ -26,6 +26,7 @@ public class Skill : MonoBehaviour
 
     public float shock_radius;
     public float magnet_radius;
+    public float climb_radius;
 
     // Start is called before the first frame update
     private void Awake()
@@ -157,6 +158,21 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
+        if (status == EStatus.BEGIN)
+        {
+            //Sound wird gespielt
+            audioSource.PlayOneShot(audioClips[0], 1f);
+            time = time_testcool_down;
+            foreach(GameObject o in playerattribute.getNearestMouseHumans())
+            {
+
+            } 
+        } 
+        else if (status == EStatus.END)
+        {
+            
+        }
+
         return false;
     }
     private bool virus(EStatus status)
