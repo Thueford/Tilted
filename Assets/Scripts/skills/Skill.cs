@@ -78,6 +78,13 @@ public class Skill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //passiv skill
+        //human picker
+        //int human = playerattribute.player.getAnzMenschen();
+        int maxdd = (int)(playerattribute.player.getAnzMenschen() / 40);
+        maxdd++;
+        playerattribute.player.setMaxDragDrp(maxdd);
+
         /*
         if (run_skill)
         {
