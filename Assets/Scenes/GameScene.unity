@@ -1075,8 +1075,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 2.8, y: 38.4}
-  m_SizeDelta: {x: 141.41003, y: 51.688324}
+  m_AnchoredPosition: {x: -0.000012398, y: 326.36}
+  m_SizeDelta: {x: 306.50464, y: 94.69156}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &532563203
 MonoBehaviour:
@@ -1584,8 +1584,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000060797, y: 6}
-  m_SizeDelta: {x: 248.5586, y: 100}
+  m_AnchoredPosition: {x: 0.000095366, y: -114}
+  m_SizeDelta: {x: 188.86774, y: 77.63829}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &820118349
 MonoBehaviour:
@@ -1702,8 +1702,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000034571, y: -103}
-  m_SizeDelta: {x: 132.11688, y: 43.323227}
+  m_AnchoredPosition: {x: -0.000048816, y: -229}
+  m_SizeDelta: {x: 188.86813, y: 60.524536}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &836010628
 MonoBehaviour:
@@ -2953,7 +2953,7 @@ GameObject:
   - component: {fileID: 1801636213}
   - component: {fileID: 1801636216}
   - component: {fileID: 1801636217}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: flat earth
   m_TagString: Earth
   m_Icon: {fileID: 0}
@@ -3109,6 +3109,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8ef2322faaf1ddd4b96f96fed007b3b0, type: 3}
   - {fileID: 8300000, guid: 229734bd75685cb439666fdaad94cb2c, type: 3}
   - {fileID: 8300000, guid: c36fdcfe47d08bf4e8423d8387d4485c, type: 3}
+  roMainDir: 0
   rb: {fileID: 1801636212}
   temp: {x: 0, y: 0, z: 0}
 --- !u!82 &1801636216
@@ -3450,7 +3451,6 @@ GameObject:
   - component: {fileID: 1899816064}
   - component: {fileID: 1899816065}
   - component: {fileID: 1899816066}
-  - component: {fileID: 1899816063}
   - component: {fileID: 1899816069}
   - component: {fileID: 1899816068}
   - component: {fileID: 1899816067}
@@ -3476,62 +3476,6 @@ Transform:
   m_Father: {fileID: 1949068217}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &1899816063
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1899816061}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -2.3012054, y: 0.4761839}
-  - {x: -1.8230387, y: 0.69549143}
-  - {x: -1.8196098, y: 0.7983166}
-  - {x: -1.795254, y: 0.85560954}
-  - {x: -1.6931052, y: 0.98174417}
-  - {x: -1.4094315, y: 1.208186}
-  - {x: -1.0880196, y: 1.3844222}
-  - {x: -1.020863, y: 1.4508414}
-  - {x: -0.8918522, y: 1.4944265}
-  - {x: -0.76059264, y: 1.5356698}
-  - {x: -0.6605576, y: 1.5517489}
-  - {x: -0.5885951, y: 1.5270046}
-  - {x: -0.5667487, y: 1.4907203}
-  - {x: -0.47879195, y: 1.5342021}
-  - {x: -0.17700365, y: 1.6621567}
-  - {x: 0.173111, y: 1.7410575}
-  - {x: 0.24469034, y: 1.7281988}
-  - {x: 0.27308083, y: 1.6680397}
-  - {x: 0.3316075, y: 1.6806301}
-  - {x: 0.96146774, y: 1.6771057}
-  - {x: 1.6833153, y: 1.4354808}
-  - {x: 1.8698957, y: 1.2874293}
-  - {x: 1.9937949, y: 1.1750077}
-  - {x: 2.0970004, y: 1.0665039}
-  - {x: 2.1777337, y: 0.9907728}
-  - {x: 2.1952243, y: 0.913312}
-  - {x: 2.309731, y: 0.8413041}
-  - {x: 2.3619387, y: 0.81760204}
-  - {x: 2.4032984, y: 0.77210855}
-  - {x: 2.43242, y: 0.71761924}
-  - {x: 2.4545367, y: 0.6699003}
-  - {x: 2.479036, y: 0.58670974}
-  - {x: 2.4751797, y: 0.528548}
-  - {x: 2.467836, y: 0.36870563}
-  - {x: 2.5445507, y: 0.30676505}
-  - {x: 2.6507308, y: 0.20778425}
-  - {x: 2.769366, y: 0.09985624}
-  - {x: 2.9144669, y: -0.008930698}
-  - {x: 2.8977323, y: -0.12860999}
-  - {x: 2.8027773, y: -0.23097698}
 --- !u!212 &1899816064
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3616,7 +3560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8f80048e6ffef47a11336a108c0fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  follow_mouse: []
+  follow_mouse: {fileID: 0}
   audioSource: {fileID: 1899816070}
   pickSounds:
   - {fileID: 8300000, guid: b1f258bd2f2e57a4991020185e08a4f6, type: 3}
@@ -3690,6 +3634,7 @@ MonoBehaviour:
   shock_radius: 50
   magnet_radius: 50
   climb_radius: 0
+  virus_radius: 0
   shock_strength: 0
   magnet_strength: 10
 --- !u!82 &1899816070
