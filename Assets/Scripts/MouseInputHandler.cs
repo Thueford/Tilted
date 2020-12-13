@@ -41,7 +41,7 @@ public class MouseInputHandler : MonoBehaviour
             mouse_position.z = 0;
 
 
-            if (Skill.skill.currentSkill != "")
+            if (Skill.skill.currentSkill != Skill.ESkill.NONE)
             {
                 //sets start var true
                 if (Skill.skill.isAvailable())
@@ -66,7 +66,7 @@ public class MouseInputHandler : MonoBehaviour
             }
         }
 
-        if (UnityEngine.Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             audioSource.PlayOneShot(dropSounds[new System.Random().Next(0, dropSounds.Length)], 0.8f);
             Debug.Log("clear");
