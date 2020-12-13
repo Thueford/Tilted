@@ -18,7 +18,7 @@ public class walking : MonoBehaviour
 
     public bool right;
 
-    private bool Bergsteiger;
+    public bool Bergsteiger;
 
     private float last_collision;
     // Start is called before the first frame update
