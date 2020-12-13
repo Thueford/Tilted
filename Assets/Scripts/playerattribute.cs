@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,6 +43,13 @@ public class playerattribute : MonoBehaviour
     {
         GameObject[] l = Spawner.getHumans();
         System.Array.Sort(l, (a, b) => MouseInputHandler.getMouseDistance(a) < MouseInputHandler.getMouseDistance(b) ? -1 : 1 );
+        return l;
+    }
+
+    public static GameObject[] getHumansInMouseRange(float radius)
+    {
+        GameObject[] l = Array.FindAll(Spawner.getHumans(), o => MouseInputHandler.getMouseDistance(o) < radius);
+        Array.Sort(l, (a, b) => MouseInputHandler.getMouseDistance(a) < MouseInputHandler.getMouseDistance(b) ? -1 : 1);
         return l;
     }
 

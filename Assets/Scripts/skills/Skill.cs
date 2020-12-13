@@ -27,6 +27,9 @@ public class Skill : MonoBehaviour
     public float shock_radius;
     public float magnet_radius;
 
+    public float shock_strength;
+    public float magnet_strength;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -66,6 +69,7 @@ public class Skill : MonoBehaviour
             if (time <= 0)
             {
                 ability[currentSkill].DynamicInvoke(EStatus.END);
+                currentSkill = ESkill.NONE;
                 run_skill = false;
             }
         }
@@ -93,8 +97,9 @@ public class Skill : MonoBehaviour
 
             //value is in playattr in futur
             Time.timeScale = 0.3f;
-            Skill.skill.time = Skill.skill.time_testcool_down;
-        } else if(status == EStatus.END)
+            skill.time = skill.time_testcool_down;
+        }
+        else if(status == EStatus.END)
         {
             //reset timescale
             Time.timeScale = 1f;
@@ -134,12 +139,11 @@ public class Skill : MonoBehaviour
         }
         else if (status == EStatus.UPDATE)
         {
-            GameObject[] l = playerattribute.getNearestMouseHumans();
-            int i = 0;
-            float d = MouseInputHandler.getMouseDistance(l[i]);
-            while (d < magnet_radius)
+            foreach(GameObject o in playerattribute.getHumansInMouseRange(magnet_radius))
             {
-                l[i].transform.position += (1 - d / magnet_radius) * (MouseInputHandler.mouse_position - l[i].transform.position);
+                float d = MouseInputHandler.getMouseDistance(o);
+                Rigidbody2D rb = o.GetComponent<Rigidbody2D>();
+                rb.velocity = 4 * Time.deltaTime * (d/magnet_radius - 1) * (MouseInputHandler.mouse_position - o.transform.position) * new Vector2(1, 0.2f);
             }
         }
 
