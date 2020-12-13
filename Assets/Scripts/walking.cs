@@ -38,7 +38,7 @@ public class walking : MonoBehaviour
     void Update()
     {
         speed += 1f * Time.deltaTime;
-        
+
         // default movement
         if (right && on_earth)
             rb.velocity = new Vector2(right ? speed : -speed, rb.velocity.y);
@@ -66,7 +66,7 @@ public class walking : MonoBehaviour
             if (rand.NextDouble() * 100 < 50)
             {
                 right = !right;
-            } 
+            }
             else
             {
                 float tmpY = rb.transform.position.y;
@@ -78,12 +78,23 @@ public class walking : MonoBehaviour
             }
         }
         /*winkel = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<Rigidbody2D>().rotation;
+		
         Debug.Log("Winkel: " + winkel);*/
-        if (!Bergsteiger && !climb && (rand.NextDouble() * 100) < Math.Abs(epEarth.cAngle) && last_collision < 0)
-            right = epEarth.cAngle < 0;
+        //if (!Bergsteiger && !climb && (rand.NextDouble() * 100) < Math.Abs(epEarth.cAngle) && last_collision < 0)
+        //    right = epEarth.cAngle < 0;
 
-        if (climb) right = epEarth.cAngle > 0;
-        last_collision -= 0.5f;
+        //if (climb) right = epEarth.cAngle > 0;
+        //last_collision -= 0.5f;
+
+        winkel = GameObject.FindGameObjectsWithTag("Earth")[0].GetComponent<earth_physics>().cAngle;
+        if (!Bergsteiger && !climb && (rand.NextDouble() * 100) < Math.Abs(winkel))
+        {
+            if (last_collision < 0) right = winkel < 0;
+            else if (winkel > 0) right = !right;
+        }
+
+        if (climb) right = winkel > 0;
+        last_collision -= 0.3f;
     }
     public void moveY(float y)
     {
@@ -92,7 +103,7 @@ public class walking : MonoBehaviour
 
     public void OnTriggerEnter2D()
     {
-        right = !right;
+        if(last_collision<3)right = !right;
         float tmpY = rb.transform.position.y;
         y = (float)rand.NextDouble() * (bndEarth.size.y - 0.3f);
         if (y < 1) y += 3;
