@@ -47,11 +47,13 @@ public class playerattribute : MonoBehaviour
 
     public void useSkill(Skill.ESkill key)
     {
-        //gets called from keyhandler and checks if ability is useable if true then use when mouseclicked?
-        //if not available return
+         //falls erwünscht wieder nutzen
+        /*if (!cool_down.cool_Downs[key].isAvailable())
+        {
+            return;
+        }//*/
 
-
-        //Debug.Log("setskill");
+        //Wählt skill aus jedoch führt den nicht aus
         if (Skill.skill.ability.ContainsKey(key))
         {
             //hier vorher auf icon cooldown checken

@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class cool_down : MonoBehaviour
 {
-    public static List<cool_down> cool_Downs = new List<cool_down>();
-    public string icon_name = "";
+    //public static List<cool_down> cool_Downs = new List<cool_down>();
+    public static Dictionary<Skill.ESkill, cool_down> cool_Downs = new Dictionary<Skill.ESkill, cool_down>();
+    public Skill.ESkill icon_name;
     public float cooldown_time;
     public float time;
     public bool available = true;
@@ -15,7 +16,8 @@ public class cool_down : MonoBehaviour
 
     private void Awake()
     {
-        cool_Downs.Add(this);
+        //cool_Downs.Add(this);
+        cool_Downs.Add(icon_name, this);
     }
 
     // Start is called before the first frame update

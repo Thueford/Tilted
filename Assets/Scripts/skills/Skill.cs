@@ -50,7 +50,7 @@ public class Skill : MonoBehaviour
     }
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -60,7 +60,7 @@ public class Skill : MonoBehaviour
         {
             time -= Time.deltaTime;
 
-            // Debug.Log(currentSkill);
+            Debug.Log(currentSkill);
             ability[currentSkill].DynamicInvoke(EStatus.UPDATE);
 
             if (time <= 0)
