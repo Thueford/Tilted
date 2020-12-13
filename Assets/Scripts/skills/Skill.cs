@@ -11,6 +11,7 @@ public class Skill : MonoBehaviour
     public bool run_skill = false;
     public float time_testcool_down = 5f;
     public float time;
+    public AudioSource music;
     public AudioSource audioSource;
     public AudioClip[] audioClips;
     public ESkill[] eSkills;
@@ -22,7 +23,7 @@ public class Skill : MonoBehaviour
 
     public enum ESkill
     {
-        NONE, FREEZE, SHOCK, WALL, MAGNET, BOMB, CLIMB, COVID19
+        NONE, FREEZE, SHOCK, WALL, MAGNET, BOMB, CLIMB, COVID19, EMERGENCY
     }
 
     public float shock_radius;
@@ -50,13 +51,14 @@ public class Skill : MonoBehaviour
             {ESkill.MAGNET, magnet},
             {ESkill.BOMB, bomb},
             {ESkill.CLIMB, hillclimber},
-            {ESkill.COVID19, virus}
+            {ESkill.COVID19, virus},
+            {ESkill.EMERGENCY, emergency}
         };
         currentSkills = new Dictionary<ESkill, float>();
     }
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -112,15 +114,18 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         if (status == EStatus.BEGIN)
         {
-            //Sound wird gespielt
+            //Sound wird gespielt, musik verlangsamt
             audioSource.PlayOneShot(audioClips[0], 1f);
-
+            music.pitch=0.5f;
             //value is in playattr in futur
             Time.timeScale = 0.3f;
             skill.time = skill.time_testcool_down;
         }
         else if(status == EStatus.END)
         {
+            //musik wieder schnell
+            music.pitch=1f;
+
             //reset timescale
             Time.timeScale = 1f;
             //run after over
@@ -195,8 +200,8 @@ public class Skill : MonoBehaviour
             foreach(GameObject o in playerattribute.getHumansInMouseRange(climb_radius))
             {
                 o.GetComponent<walking>().climb = true;
-            } 
-        } 
+            }
+        }
         else if (status == EStatus.END)
         {
             foreach(GameObject o in Spawner.getHumans())
@@ -208,6 +213,14 @@ public class Skill : MonoBehaviour
         return false;
     }
     private bool virus(EStatus status)
+    {
+        ///////////////////////////////
+        ///     ADD SOUND HERE      ///
+        ///////////////////////////////
+        return false;
+    }
+
+    private bool emergency(EStatus status)
     {
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
