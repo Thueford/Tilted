@@ -19,7 +19,7 @@ public class cool_down : MonoBehaviour
     private void Awake()
     {
         //cool_Downs.Add(this);
-        cool_Downs.Add(icon_name, this);
+        if(!cool_Downs.ContainsKey(icon_name)) cool_Downs.Add(icon_name, this);
     }
 
     // Start is called before the first frame update
