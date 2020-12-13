@@ -51,7 +51,7 @@ public class StartSceneButtons : MonoBehaviour
     public void credits_btn_pressed()
     {
         playClickSound();
-        SceneManager.LoadScene("CreditScene");
+        SceneManager.LoadScene("CreditsScene");
     }
 
     private void playClickSound() {
