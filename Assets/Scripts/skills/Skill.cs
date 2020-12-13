@@ -18,6 +18,7 @@ public class Skill : MonoBehaviour
     private GameObject icePicture;
     private GameObject bombPicture;
     private GameObject covidPicture;
+    public GameObject wallPrefab;
 
     private float bombRadius = 55f;
 
@@ -193,11 +194,16 @@ public class Skill : MonoBehaviour
         {
             audioSource.PlayOneShot(audioClips[2], 0.7f);
 
+            //Skill.skill.currentSkill = Skill.ESkill.WALL;
+
             if (MouseInputHandler.Instance.follow_mouse)
             {
                 Destroy(MouseInputHandler.Instance.follow_mouse);
-                //instance wall here
             }
+            GameObject wall = Instantiate(wallPrefab, MouseInputHandler.mouse_position, Quaternion.identity);
+            wall.transform.localScale = new Vector3( 20f, 20f,0 );
+            MouseInputHandler.Instance.follow_mouse = wall;
+
         } else if (status == EStatus.END)
         {
             Destroy(MouseInputHandler.Instance.follow_mouse);

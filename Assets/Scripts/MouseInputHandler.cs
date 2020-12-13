@@ -64,18 +64,27 @@ public class MouseInputHandler : MonoBehaviour
                 {
                     cool_down.cool_Downs[Skill.skill.currentSkill].keystat = true;
                     cool_down.cool_Downs[Skill.skill.currentSkill].available = false;
+                    if (Skill.skill.currentSkill != Skill.ESkill.WALL)
+                    {
+                        Destroy(follow_mouse);
+                    }
                     Skill.skill.runAbility();
                     //Skill.skill.run_skill = true;
 
                     //foreach (GameObject obj in follow_mouse)
                     //{
-                        //destroyobj again
-                    Destroy(follow_mouse);
+                    //destroyobj again
+
+                    //if maybe delete
+                    //Debug.Log(Skill.skill.currentSkill);
+                    //Debug.Log(Skill.ESkill.WALL);
+                    
+                        
                     //}
                     //follow_mouse.Clear();
                 } else
                 {
-                    if (follow_mouse)
+                    if (follow_mouse && Skill.skill.currentSkill != Skill.ESkill.WALL)
                     {
                         Destroy(follow_mouse);
                     }
