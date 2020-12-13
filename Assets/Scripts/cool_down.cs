@@ -20,6 +20,7 @@ public class cool_down : MonoBehaviour
     {
         //cool_Downs.Add(this);
         if(!cool_Downs.ContainsKey(icon_name)) cool_Downs.Add(icon_name, this);
+        cooldown_time = playerattribute.cool_down_time[icon_name];
     }
 
     // Start is called before the first frame update
