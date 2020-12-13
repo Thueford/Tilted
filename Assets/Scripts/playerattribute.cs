@@ -12,6 +12,8 @@ public class playerattribute : MonoBehaviour
     public int anzMenschen;
     public int dragDropAnz;
     public static Dictionary<KeyCode, Skill.ESkill> keySkill;
+    public static Dictionary<Skill.ESkill, GameObject> has_follow_mouse;
+    public GameObject bombPrefab; 
 
     private void Awake()
     {
@@ -28,6 +30,11 @@ public class playerattribute : MonoBehaviour
             {KeyCode.Z, Skill.ESkill.CLIMB},
             {KeyCode.U, Skill.ESkill.COVID19},
             {KeyCode.Space, Skill.ESkill.EMERGENCY}
+        };
+
+        has_follow_mouse = new Dictionary<Skill.ESkill, GameObject>()
+        {
+            {Skill.ESkill.BOMB, bombPrefab},
         };
     }
 
@@ -65,6 +72,16 @@ public class playerattribute : MonoBehaviour
             //hier vorher auf icon cooldown checken
             //time auf cooldowntime setzten
             Skill.skill.currentSkill = key;
+
+            if (has_follow_mouse.ContainsKey(key))
+            {
+                GameObject follow_mouse_object = Instantiate(has_follow_mouse[key], MouseInputHandler.mouse_position, Quaternion.identity);
+                MouseInputHandler.Instance.follow_mouse.Add(follow_mouse_object);
+            }
+
+            //bomb follow
+            //if in list it icon spawn
+            //GameObject a = Instantiate(prefabs[i], new Vector3(x, y, 0), Quaternion.identity);
         }
     }
 

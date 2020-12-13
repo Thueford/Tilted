@@ -8,7 +8,8 @@ public class MouseInputHandler : MonoBehaviour
     public static MouseInputHandler Instance;
 
     public static Vector3 mouse_position;
-    private List<GameObject> picked = new List<GameObject>();
+    private List<GameObject> picked;
+    public List<GameObject> follow_mouse;
 
     public AudioSource audioSource;
     public AudioClip[] pickSounds;
@@ -26,6 +27,8 @@ public class MouseInputHandler : MonoBehaviour
         }
 
         Instance = this;
+        picked = new List<GameObject>();
+        follow_mouse = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -34,6 +37,12 @@ public class MouseInputHandler : MonoBehaviour
         mouse_position = Input.mousePosition;
         mouse_position = Camera.main.ScreenToWorldPoint(mouse_position);
         mouse_position.z = 0;
+
+        foreach (GameObject obj in follow_mouse)
+        {
+            //follow mouse
+            obj.transform.position = mouse_position;
+        }
 
         //checks for mouse events
         if (Input.GetMouseButtonDown(0))
@@ -48,6 +57,13 @@ public class MouseInputHandler : MonoBehaviour
                     cool_down.cool_Downs[Skill.skill.currentSkill].keystat = true;
                     Skill.skill.runAbility();
                     //Skill.skill.run_skill = true;
+
+                    foreach (GameObject obj in follow_mouse)
+                    {
+                        //destroyobj again
+                        Destroy(obj);
+                    }
+                    follow_mouse.Clear();
                 }
             }
 

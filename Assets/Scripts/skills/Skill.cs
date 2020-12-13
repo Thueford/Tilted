@@ -16,6 +16,10 @@ public class Skill : MonoBehaviour
     public AudioClip[] audioClips;
     public ESkill[] eSkills;
     private GameObject icePicture;
+    private GameObject bombPicture;
+    private GameObject covidPicture;
+
+    private float bombRadius = 55f;
 
     public enum EStatus
     {
@@ -57,9 +61,14 @@ public class Skill : MonoBehaviour
         };
         currentSkills = new Dictionary<ESkill, float>();
 
-        //find the ice picture
+        //Init effect pics
         icePicture = GameObject.FindGameObjectWithTag("Ice");
         icePicture.SetActive(false);
+        bombPicture = GameObject.FindGameObjectWithTag("BombPic");
+        bombPicture.SetActive(false);
+        covidPicture = GameObject.FindGameObjectWithTag("CovidPic");
+        covidPicture.SetActive(false);
+
     }
     void Start()
     {
@@ -151,6 +160,7 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         if(status == EStatus.BEGIN)
         {
+            audioSource.PlayOneShot(audioClips[1], 0.5f);
             time = time_testcool_down;
         }
         else if(status == EStatus.UPDATE)
@@ -165,9 +175,10 @@ public class Skill : MonoBehaviour
     }
     private bool wall(EStatus status)
     {
-        ///////////////////////////////
-        ///     ADD SOUND HERE      ///
-        ///////////////////////////////
+        if(status == EStatus.BEGIN)
+        {
+            audioSource.PlayOneShot(audioClips[2], 0.7f);
+        }
         return false;
     }
     private bool magnet(EStatus status)
@@ -177,6 +188,7 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         if (status == EStatus.BEGIN)
         {
+            audioSource.PlayOneShot(audioClips[3], 0.3f);
             time = time_testcool_down;
         }
         else if (status == EStatus.UPDATE)
@@ -196,6 +208,30 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
+        if (status == EStatus.BEGIN)
+        {
+
+            audioSource.PlayOneShot(audioClips[4], 0.5f);
+            
+            //Vector3 mouse_position = MouseInputHandler.mouse_position;
+
+            foreach (GameObject human in Spawner.getHumans())
+            {
+                if (MouseInputHandler.getMouseDistance(human) <= bombRadius)
+                {
+                    Spawner.killHumans(human);
+                }
+            }
+
+            //show bomb picture
+            bombPicture.SetActive(true);
+        }
+        else if (status == EStatus.END)
+        {
+
+            //hide bombpic
+            bombPicture.SetActive(false);
+        }
         return false;
     }
     private bool hillclimber(EStatus status)
@@ -206,7 +242,7 @@ public class Skill : MonoBehaviour
         if (status == EStatus.BEGIN)
         {
             //Sound wird gespielt
-            audioSource.PlayOneShot(audioClips[0], 1f);
+            audioSource.PlayOneShot(audioClips[5], 1f);
             time = time_testcool_down;
             foreach(GameObject o in playerattribute.getHumansInMouseRange(climb_radius))
             {
@@ -228,14 +264,40 @@ public class Skill : MonoBehaviour
         ///////////////////////////////
         ///     ADD SOUND HERE      ///
         ///////////////////////////////
+
+        if (status == EStatus.BEGIN)
+        {
+
+            audioSource.PlayOneShot(audioClips[6], 0.5f);
+            //show bomb picture
+            covidPicture.SetActive(true);
+        }
+        else if (status == EStatus.END)
+        {
+
+            //hide bombpic
+            covidPicture.SetActive(false);
+        }
         return false;
     }
 
     private bool emergency(EStatus status)
     {
         ///////////////////////////////
-        ///     ADD SOUND HERE      ///
+        audioSource.PlayOneShot(audioClips[7], 0.3f);
         ///////////////////////////////
+
+        /*
+         *
+         *
+         * foreach(GameObject g in Spawner.getHuman()){
+g.GetComponent<walking>().moveX(XCoordOfEarthCenter);
+}
+         *
+         *
+         *
+         */
+
         return false;
     }
 }
