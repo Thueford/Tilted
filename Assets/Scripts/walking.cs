@@ -93,7 +93,7 @@ public class walking : MonoBehaviour
         // rb.velocity += addVelocity;
 
         //change walking directions
-        if (speed * Time.deltaTime * rand.NextDouble() * 1e3 < 1 && on_earth && !climb)
+        if (speed * Time.deltaTime * rand.NextDouble() * 50 < 1 && on_earth && !climb)
         {
             double r = rand.NextDouble() * 100;
             if (r < 50)
