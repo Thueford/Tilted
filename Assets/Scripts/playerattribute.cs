@@ -15,6 +15,8 @@ public class playerattribute : MonoBehaviour
     public static Dictionary<Skill.ESkill, GameObject> has_follow_mouse;
     public GameObject bombPrefab;
     public GameObject magnetPrefab;
+    public static Dictionary<Skill.ESkill, float> cool_down_time;
+    public static Dictionary<Skill.ESkill, float> skill_duration;
 
     private void Awake()
     {
@@ -38,6 +40,25 @@ public class playerattribute : MonoBehaviour
             {Skill.ESkill.BOMB, bombPrefab},
             {Skill.ESkill.MAGNET, magnetPrefab},
         };
+
+        cool_down_time = new Dictionary<Skill.ESkill, float>() {
+            {Skill.ESkill.FREEZE, 20f},
+            {Skill.ESkill.SHOCK, 15f},
+            {Skill.ESkill.WALL, 20f},
+            {Skill.ESkill.MAGNET, 25f},
+            {Skill.ESkill.BOMB, 15f},
+            {Skill.ESkill.CLIMB, 20f},
+            {Skill.ESkill.COVID19, 25f}
+        };
+
+        skill_duration = new Dictionary<Skill.ESkill, float>() {
+            {Skill.ESkill.FREEZE, 3f},
+            {Skill.ESkill.WALL, 5f},
+            {Skill.ESkill.MAGNET, 10f},
+            {Skill.ESkill.CLIMB, 5f},
+        };
+
+
     }
 
     // Start is called before the first frame update
