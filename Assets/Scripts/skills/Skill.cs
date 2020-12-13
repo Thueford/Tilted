@@ -144,7 +144,7 @@ public class Skill : MonoBehaviour
             {
                 float d = MouseInputHandler.getMouseDistance(o);
                 Rigidbody2D rb = o.GetComponent<Rigidbody2D>();
-                rb.velocity = 4 * Time.deltaTime * (d/magnet_radius - 1) * (MouseInputHandler.mouse_position - o.transform.position) * new Vector2(1, 0.2f);
+                rb.position += 4 * Time.deltaTime * (1 - d/magnet_radius) * (MouseInputHandler.mouse_position - o.transform.position) * new Vector2(1, 0.2f);
             }
         }
 
