@@ -34,6 +34,7 @@ public class Skill : MonoBehaviour
     public float shock_radius;
     public float magnet_radius;
     public float climb_radius;
+    public float virus_radius;
 
     public float shock_strength;
     public float magnet_strength;
@@ -284,11 +285,25 @@ public class Skill : MonoBehaviour
             audioSource.PlayOneShot(audioClips[6], 0.5f);
             //show bomb picture
             covidPicture.SetActive(true);
+            foreach (GameObject o in playerattribute.getHumansInMouseRange(virus_radius))
+            {
+                o.GetComponent<walking>().corona = true;
+            }
+        } 
+        else if (status == EStatus.UPDATE)
+        {
+            
         }
         else if (status == EStatus.END)
         {
-
-            //hide bombpic
+            System.Random rand = new System.Random();
+            foreach (GameObject o in Spawner.getHumans())
+            {
+                if (rand.NextDouble() * 100 < 40)
+                {
+                    Spawner.killHumans(o);
+                }
+            }
             covidPicture.SetActive(false);
         }
         return false;

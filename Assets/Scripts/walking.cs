@@ -53,7 +53,11 @@ public class walking : MonoBehaviour
         if (on_earth)
         {
             bool tr = right;
-            if (emergency) tr = rb.transform.position.x < emergency_target;
+            if (emergency)
+            {
+                if (inRange(rb.transform.position.x, emergency_target - 2, emergency_target + 2)) emergency = false;
+                tr = rb.transform.position.x < emergency_target;
+            }
             rb.velocity = new Vector2(tr ? speed : -speed, rb.velocity.y);
         }
 
